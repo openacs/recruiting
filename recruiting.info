@@ -7,14 +7,14 @@
     <initial-install-p>f</initial-install-p>
     <singleton-p>f</singleton-p>
 
-    <version name="1.0" url="http://openacs.org/repository/download/apm/recruiting-1.0.apm">
+    <version name="2.0.2" url="http://openacs.org/repository/download/apm/recruiting-2.0.2.apm">
     <database-support>
         <database>oracle</database>
         <database>postgresql</database>
     </database-support>
         <owner url="mailto:chak@openforce.net">dan chak</owner>
 
-        <provides url="recruiting" version="1.0"/>
+        <provides url="recruiting" version="2.0.2"/>
         <requires url="ui" version="0.1"/>
 
         <files>
