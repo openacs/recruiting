@@ -131,7 +131,7 @@ namespace eval recruiting_criteria {
     } {
         get a recruiting criteria
     } {
-        db_1row get_recruiting_criteria {}
+        db_1row get_criteria {}
 
         set recruiting_criteria(criteria_id) $criteria_id
         set recruiting_criteria(package_id) $package_id
@@ -243,7 +243,8 @@ namespace eval recruiting_interview {
     } {
         delete an interview
     } {
-        db_exec_plsql delete_interview
+        db_exec_plsql delete_ratings {}
+        db_exec_plsql delete_interview {}
     }
 
     ad_proc -public get {
