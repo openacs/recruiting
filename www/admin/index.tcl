@@ -9,7 +9,7 @@ ad_page_contract {
 }
 
 set package_id [ad_conn package_id]
-set user_id [ad_verify_and_get_user_id]
+set user_id [ad_conn user_id]
 
 db_1row status_types_defined_p {}
 db_1row criteria_defined_p {}

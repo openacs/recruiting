@@ -9,7 +9,7 @@ ad_page_contract {
 }
 
 set package_id [ad_conn package_id]
-set user_id [ad_verify_and_get_user_id]
+set user_id [ad_conn user_id]
 
 ui::table::set_title archived "Archived Candidates"
 ui::table::set_column_headings archived [list "Name" "Location" "Status"]

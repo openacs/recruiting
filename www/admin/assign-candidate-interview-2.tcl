@@ -16,7 +16,7 @@ set package_id [ad_conn package_id]
 set node_id [ad_conn node_id]
 set package_url [site_node::get_url -node_id $node_id]
 
-set user_id [ad_verify_and_get_user_id]
+set user_id [ad_conn user_id]
 
 array set candidate_info [recruiting::candidate::get -candidate_id $candidate_id]
 
