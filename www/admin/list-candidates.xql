@@ -3,7 +3,8 @@
 
     <fullquery name="get_candidates">
         <querytext>
-           select c.first_name,
+           select c.candidate_id,
+                  c.first_name,
                   c.last_name,
                   c.city,
                   c.state,

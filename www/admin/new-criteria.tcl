@@ -37,4 +37,6 @@ if {[form is_valid new_criteria]} {
     ad_script_abort
 }
 
+set context_bar [list [list "../" "Recruiting"] [list "index" "Admin"] [list "list-criteria" "Criteria Types"] "New Criteria"]
+
 ad_return_template

@@ -37,4 +37,6 @@ if {[form is_valid new_status_type]} {
     ad_script_abort
 }
 
+set context_bar [list [list "../" "Recruiting"] [list "index" "Admin"] [list "list-status-types" "Status Types"] "New Status Type"]
+
 ad_return_template

@@ -1,0 +1,1 @@
+<%= [table::outputTable types] %>

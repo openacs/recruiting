@@ -11,11 +11,20 @@ ad_page_contract {
 set package_id [ad_conn package_id]
 set user_id [ad_verify_and_get_user_id]
 
-db_multirow enabled_criteria_types get_enabled_criteria_types "" {
-    set disable_url "disable-criteria?[export_vars criteria_id]"
+table::setTitle enabled "Candidate Criteria"
+db_foreach get_enabled_criteria_types {} {
+    table::addUnsortedRow enabled [list "$criteria_name" "(<a href=\"edit-criteria?[export_vars criteria_id]\">edit</a>) (<a href=\"disable-criteria?[export_vars criteria_id]\">disable</a>)"]
 }
 
-db_multirow disabled_criteria_types get_disabled_criteria_types "" {
-    set enable_url "enable-criteria?[export_vars criteria_id]"
+table::setTitle disabled "Disabled Criteria"
+db_foreach get_disabled_criteria_types {} {
+    table::addUnsortedRow disabled [list "$criteria_name" "(<a href=\"enable-criteria?[export_vars criteria_id]\">enable</a>)"]
+   
 }
 
+table::setTitle options "Options"
+table::addUnsortedRow options [list "<a href=\"new-criteria\">Add New Criteria</a>"]
+
+set context_bar [list [list "../" "Recruiting"] [list "index" "Admin"] "Criteria Types"]
+
+ad_return_template

@@ -1,11 +1,8 @@
-<master>
+<master src="recruiting-admin-master">
+<property name="context_bar">@context_bar@</property>
 
-<b>Candidates:</b><br>
-<a href=list-candidates>View candidates</a><br>
-<a href=new-candidate>Add a new candidate</a><br>
-
-<p>
-
-<b>Setup:</b><br>
-<a href=list-status-types.tcl>Modify candidate status types</a><br>
-<a href=list-criteria>Modify interview criteria</a>
+<table width=100%><tr><td valign=top>
+<%= [table::outputTable summary] %>
+</td><td valign=top>
+<%= [table::outputTable options] %>
+</td></tr></table>

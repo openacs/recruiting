@@ -3,9 +3,11 @@
 
 <table width=100%>
 <tr><td>
-<%= [table::outputTable candidates] %>
+<%= [table::outputTable candidate] %>
+<p>
+<%= [table::outputTable interviews] %>
 </td><td valign=top>
 <%= [table::outputTable options] %>
-</td><tr>
+</td></tr>
 </table>
 

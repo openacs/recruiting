@@ -81,10 +81,10 @@ element create new_candidate email \
         -html {size 30}
 
 element create new_candidate status \
-        -label "Status:" \
+        -label "Status (<a href=\"javascript:openPage('status-help',400,300)\">help</a>):" \
         -datatype integer \
         -widget select \
-        -options [db_list_of_lists get_status_types "select short_desc,status_type_id from recruiting_status_types where enabled_p='t' order by short_desc"] \
+        -options [db_list_of_lists get_status_types "select short_desc,status_type_id from recruiting_status_types where enabled_p='t' order by short_desc"]
 
 if {[form is_valid new_candidate]} {
     form get_values new_candidate \
@@ -108,5 +108,7 @@ if {[form is_valid new_candidate]} {
     ad_returnredirect list-candidates
     ad_script_abort
 }
+
+set context_bar [list [list "../" "Recruiting"] [list "index" "Admin"] [list "list-candidates" "Candidates"] "New Candidate"]
 
 ad_return_template
