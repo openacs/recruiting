@@ -51,7 +51,7 @@ namespace eval recruiting_status_type {
 
     }
 
-    ad_proc public disable {
+    ad_proc -public disable {
         {-status_type_id:required}
     } {
         delete a recruiting status type
@@ -59,12 +59,12 @@ namespace eval recruiting_status_type {
         db_dml disable_status_type {}
     }
 
-    ad_proc public enable {
+    ad_proc -public enable {
         {-status_type_id:required}
     } {
         delete a recruiting status type
     } {
-        db_eml enable_status_type {}
+        db_dml enable_status_type {}
     }
 
     ad_proc -public get {
@@ -157,7 +157,7 @@ namespace eval recruiting_candidate {
         {-zip_plus_four:required}
         {-country:required}
         {-email:required}
-        {-status:requied}
+        {-status:required}
         {-package_id ""}
     } {
         add a new recruiting candidate
@@ -170,6 +170,7 @@ namespace eval recruiting_candidate {
         set extra_vars [ns_set create]
         ns_set put $extra_vars package_id $package_id
         ns_set put $extra_vars first_name $first_name
+        ns_set put $extra_vars last_name $last_name
         ns_set put $extra_vars address1 $address1
         ns_set put $extra_vars address2 $address2
         ns_set put $extra_vars city $city

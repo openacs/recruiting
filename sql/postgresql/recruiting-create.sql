@@ -120,6 +120,8 @@ create table recruiting_candidates (
        status                      integer
                                    constraint recruiting_status_fk
                                    references recruiting_status_types(status_type_id)
+                                   constraint recruiting_status_nn
+                                   not null
 );
 
 select acs_object_type__create_type (

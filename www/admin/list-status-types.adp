@@ -15,7 +15,7 @@
   </multiple>
 </if>
 <else>
-   <tr><td>none defined (<a href=new-status-type.tcl>add one</a>)</td></tr>
+   <tr><td>none defined (<a href=new-status-type>add one</a>)</td></tr>
 </else>
 </table>
 

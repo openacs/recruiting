@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
-    <rdbms><type>postgresql</type><version>7.1</version></rdbms>
-
 <queryset>
+    <rdbms><type>postgresql</type><version>7.1</version></rdbms>
 
     <fullquery name="recruiting_status_type::disable.disable_status_type">
         <querytext>

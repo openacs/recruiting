@@ -64,17 +64,28 @@ begin
 
 end;' language 'plpgsql';
 
-select define_function_args('recruiting_status_type__delete','status_type_id');
-create function recruiting_status_type__delete(integer)
+select define_function_args('recruiting_status_type__disable','status_type_id');
+create function recruiting_status_type__disable(integer)
 returns integer as '
 declare
   p_status_type_id      alias for $1;
 begin
 
-  delete from recruiting_status_types where status_type_id = p_status_type_id;
+  update recruiting_status_types set enabled_p=''f'' where status_type_id = p_status_type_id;
   
-  perform acs_object__delete(p_status_type_id);
+  return 1;
 
+end;' language 'plpgsql';
+
+select define_function_args('recruiting_status_type__enable','status_type_id');
+create function recruiting_status_type__enable(integer)
+returns integer as '
+declare
+  p_status_type_id      alias for $1;
+begin
+
+  update recruiting_status_types set enabled_p=''t'' where status_type_id = p_status_type_id;
+  
   return 1;
 
 end;' language 'plpgsql';
@@ -100,14 +111,14 @@ declare
   p_criteria_id         alias for $1;
   p_package_id          alias for $2;
   p_criteria_name       alias for $3;
-  p_descriptioin        alias for $4;
+  p_description         alias for $4;
   p_enabled_p           alias for $5;
   p_creation_user       alias for $6;
   p_creation_ip         alias for $7;
-  v_creation_id         integer;
+  v_criteria_id         integer;
 begin
 
-  v_creation_id := acs_object_type__create_type(
+  v_criteria_id := acs_object__new(
                 p_criteria_id,
                 ''recruiting_criteria'',
                 now(),
@@ -131,16 +142,27 @@ begin
 
 end;' language 'plpgsql';
 
-select define_function_args('recruiting_criteria__delete','criteria_id');
-create function recruiting_criteria__delete(integer)
+select define_function_args('recruiting_criteria__disable','criteria_id');
+create function recruiting_criteria__disable(integer)
 returns integer as '
 declare
   p_criteria_id         alias for $1;
 begin
 
-  delete from recruiting_criteria where criteria_id = p_criteria_id;
+  update recruiting_criteria set enabled_p=''f'' where criteria_id = p_criteria_id;
 
-  perform acs_object__delete(p_criteria_id);
+  return 1;
+
+end;' language 'plpgsql';
+
+select define_function_args('recruiting_criteria__enable','criteria_id');
+create function recruiting_criteria__enable(integer)
+returns integer as '
+declare
+  p_criteria_id         alias for $1;
+begin
+
+  update recruiting_criteria set enabled_p=''t'' where criteria_id = p_criteria_id;
 
   return 1;
 
@@ -171,8 +193,8 @@ declare
   p_address2            alias for $6;
   p_city                alias for $7;
   p_state               alias for $8;
-  p_zip                 alias for $9
-  p_zip_plus_four       alias for $10
+  p_zip                 alias for $9;
+  p_zip_plus_four       alias for $10;
   p_country             alias for $11;
   p_email               alias for $12;
   p_status              alias for $13;
