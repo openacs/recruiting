@@ -111,6 +111,8 @@ create table recruiting_candidates (
        address2                    varchar(2048),
        city                        varchar(1024),
        state                       varchar(1024),
+       zip                         varchar(5),
+       zip_plus_four               varchar(4),
        country                     varchar(1024),
 
        email                       varchar(1024),
