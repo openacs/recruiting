@@ -38,7 +38,7 @@ element create msg body \
         -datatype text \
         -widget textarea \
         -html {rows 10 cols 60 wrap soft} \
-        -value [recruiting_email::get_body -package_id $package_id]
+        -value [recruiting::email::get_body -package_id $package_id]
 
 element create msg candidate_id \
         -widget hidden \
@@ -69,6 +69,7 @@ if {[form is_valid msg]} {
 set context_bar [list [list "../" "Recruiting"] [list "index" "Admin"] [list "list-candidates" "Candidates"] [list "view-one-candidate?[export_vars candidate_id]" "One Candidate"] "Assign Interview"]
 
 ad_return_template
+
 
 
 
