@@ -39,7 +39,7 @@ table::setColumnHeadings interviews [list "Interviewer" "Ratings"]
 table::setExportVars interviews [export_vars candidate_id]
 
 db_foreach get_interviews {} {
-    table::addUnsortedRow interviews [list "$last_name, $first_names" "$num_ratings out of $possible_ratings"]
+    table::addUnsortedRow interviews [list "$last_name, $first_names" "$num_ratings out of $possible_ratings" "(<a href=view-ratings?[export_vars interview_id]>view ratings</a>)"]
 } if_no_rows {
     table::addUnsortedRow interviews [list "No Interviews assigned. (<a href=assign-candidate-interview?[export_vars candidate_id]>assign one</a>)"]
 }

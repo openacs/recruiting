@@ -35,6 +35,8 @@ if {[form is_valid assign_interview]} {
 
     db_foreach select_users {} {
         table::addSortableRow search_results [list "<a href=assign-candidate-interview-2?[export_vars "candidate_id search_user_id"]>$last_name, $first_names ($email)</a>"]
+    } if_no_rows {
+        table::addSortableRow search_results [list "There were no users matching your criteria"]
     }
 }
 
