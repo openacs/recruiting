@@ -112,6 +112,24 @@
         </querytext>
     </fullquery>
    
+    <fullquery name="recruiting_candidate::update_candidate.update_candidate">
+        <querytext>
+            update recruiting_candidates
+               set first_name = :first_name,
+                   last_name = :last_name,
+                   address1 = :address1,
+                   address2 = :address2,
+                   city = :city,
+                   state = :state,
+                   zip = :zip,
+                   zip_plus_four = :zip_plus_four,
+                   country = :country,
+                   email = :email,
+                   status = :status
+             where candidate_id = :candidate_id
+        </querytext>
+    </fullquery>
+
     <fullquery name="recruiting_interview::delete.delete_ratings">
         <querytext>
             delete from recruiting_ratings

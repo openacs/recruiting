@@ -14,12 +14,16 @@ set user_id [ad_verify_and_get_user_id]
 table::setTitle enabled "Candidate Criteria"
 db_foreach get_enabled_criteria_types {} {
     table::addUnsortedRow enabled [list "$criteria_name" "(<a href=\"edit-criteria?[export_vars criteria_id]\">edit</a>) (<a href=\"disable-criteria?[export_vars criteria_id]\">disable</a>)"]
+}  if_no_rows {
+    table::addUnsortedRow enabled [list "There is no criteria defined yet.  (<a href=new-criteria>Add Criteria</a>)"]
 }
+
 
 table::setTitle disabled "Disabled Criteria"
 db_foreach get_disabled_criteria_types {} {
     table::addUnsortedRow disabled [list "$criteria_name" "(<a href=\"enable-criteria?[export_vars criteria_id]\">enable</a>)"]
-   
+} if_no_rows {
+    table::addUnsortedRow disabled [list "There are no disabled criteria"]
 }
 
 table::setTitle options "Options"

@@ -45,7 +45,7 @@ db_foreach get_interviews {} {
 }
 
 table::setTitle options "Options"
-table::addUnsortedRow options [list "<a href=modify-candidate-info?[export_vars candidate_id]>Edit Information</a>"]
+table::addUnsortedRow options [list "<a href=edit-candidate?[export_vars candidate_id]>Edit Information</a>"]
 table::addUnsortedRow options [list "<a href=change-candidate-status?[export_vars candidate_id]>Change Status</a>"]
 table::addUnsortedRow options [list "<a href=assign-candidate-interview?[export_vars candidate_id]>Assign Interview</a>"]
 

@@ -24,10 +24,20 @@
             <file type="data_model" db_type="postgresql" path="sql/postgresql/recruiting-drop.sql"/>
             <file type="query_file" db_type="postgresql" path="tcl/dotlrn-recruiting-procs-postgresql.xql"/>
             <file type="tcl_procs" path="tcl/dotlrn-recruiting-procs.tcl"/>
+            <file type="tcl_procs" path="tcl/table-sorter-procs.tcl"/>
+            <file type="tcl_util" path="tcl/tableSorter.tcl"/>
+            <file type="content_page" path="www/admin/assign-candidate-interview-2.tcl"/>
+            <file type="content_page" path="www/admin/assign-candidate-interview.adp"/>
+            <file type="content_page" path="www/admin/assign-candidate-interview.tcl"/>
+            <file type="query_file" path="www/admin/assign-candidate-interview.xql"/>
             <file type="content_page" path="www/admin/disable-criteria.tcl"/>
             <file type="query_file" path="www/admin/disable-criteria.xql"/>
             <file type="content_page" path="www/admin/disable-status-type.tcl"/>
             <file type="query_file" path="www/admin/disable-status-type.xql"/>
+            <file type="content_page" path="www/admin/edit-criteria.adp"/>
+            <file type="content_page" path="www/admin/edit-criteria.tcl"/>
+            <file type="content_page" path="www/admin/edit-status-type.adp"/>
+            <file type="content_page" path="www/admin/edit-status-type.tcl"/>
             <file type="content_page" path="www/admin/enable-criteria.tcl"/>
             <file type="query_file" path="www/admin/enable-criteria.xql"/>
             <file type="content_page" path="www/admin/enable-status-type.tcl"/>
@@ -51,6 +61,13 @@
             <file type="content_page" path="www/admin/new-criteria.tcl"/>
             <file type="content_page" path="www/admin/new-status-type.adp"/>
             <file type="content_page" path="www/admin/new-status-type.tcl"/>
+            <file type="content_page" path="www/admin/recruiting-admin-master.adp"/>
+            <file type="content_page" path="www/admin/status-help.adp"/>
+            <file type="content_page" path="www/admin/status-help.tcl"/>
+            <file type="query_file" path="www/admin/status-help.xql"/>
+            <file type="content_page" path="www/admin/view-one-candidate.adp"/>
+            <file type="content_page" path="www/admin/view-one-candidate.tcl"/>
+            <file type="query_file" path="www/admin/view-one-candidate.xql"/>
             <file type="content_page" path="www/list-candidates.tcl"/>
             <file type="content_page" path="www/list-ratings.tcl"/>
         </files>

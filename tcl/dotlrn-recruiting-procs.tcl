@@ -243,6 +243,27 @@ namespace eval recruiting_candidate {
         
         return [array get recruiting_candidate]
     }
+    
+    ad_proc -public update_candidate {
+        {-candidate_id:required}
+        {-first_name:required}
+        {-last_name:required}
+        {-address1:required}
+        {-address2:required}
+        {-city:required}
+        {-state:required}
+        {-zip:required}
+        {-zip_plus_four:required}
+        {-country:required}
+        {-email:required}
+        {-status:required}
+        {-package_id:required}
+    } {
+        update a candidate
+    } {
+        db_dml update_candidate {}
+    }
+
 }
 
 namespace eval recruiting_interview {
