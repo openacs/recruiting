@@ -27,7 +27,7 @@
 
 select define_function_args('recruiting_status_type__new','status_type_id,package_id,short_desc,long_desc,enabled_p,creation_user,creation_ip');
 
-create function recruiting_status_type__new(integer,integer,varchar,varchar,boolean,integer,varchar)
+create or replace function recruiting_status_type__new(integer,integer,varchar,varchar,boolean,integer,varchar)
 returns integer as'
 declare
   p_status_type_id              alias for $1;
@@ -65,7 +65,7 @@ begin
 end;' language 'plpgsql';
 
 select define_function_args('recruiting_status_type__disable','status_type_id');
-create function recruiting_status_type__disable(integer)
+create or replace function recruiting_status_type__disable(integer)
 returns integer as '
 declare
   p_status_type_id      alias for $1;
@@ -80,7 +80,7 @@ begin
 end;' language 'plpgsql';
 
 select define_function_args('recruiting_status_type__enable','status_type_id');
-create function recruiting_status_type__enable(integer)
+create or replace function recruiting_status_type__enable(integer)
 returns integer as '
 declare
   p_status_type_id      alias for $1;
@@ -95,7 +95,7 @@ begin
 end;' language 'plpgsql';
 
 select define_function_args('recruiting_status_type__name','message_id');
-create function recruiting_status_type__name(integer)
+create or replace function recruiting_status_type__name(integer)
 returns varchar as '
 declare
   p_message_id          alias for $1;
@@ -109,7 +109,7 @@ end;' language 'plpgsql';
 
 
 select define_function_args('recruiting_criteria__new','criteria_id,package_id,criteria_name,description,enabled_p,creation_user,creation_ip');
-create function recruiting_criteria__new(integer,integer,varchar,varchar,boolean,integer,varchar)
+create or replace function recruiting_criteria__new(integer,integer,varchar,varchar,boolean,integer,varchar)
 returns integer as '
 declare
   p_criteria_id         alias for $1;
@@ -147,7 +147,7 @@ begin
 end;' language 'plpgsql';
 
 select define_function_args('recruiting_criteria__disable','criteria_id');
-create function recruiting_criteria__disable(integer)
+create or replace function recruiting_criteria__disable(integer)
 returns integer as '
 declare
   p_criteria_id         alias for $1;
@@ -162,7 +162,7 @@ begin
 end;' language 'plpgsql';
 
 select define_function_args('recruiting_criteria__enable','criteria_id');
-create function recruiting_criteria__enable(integer)
+create or replace function recruiting_criteria__enable(integer)
 returns integer as '
 declare
   p_criteria_id         alias for $1;
@@ -177,7 +177,7 @@ begin
 end;' language 'plpgsql';
 
 select define_function_args('recruiting_criteria__name','criteria_id');
-create function recruiting_criteria__name(integer)
+create or replace function recruiting_criteria__name(integer)
 returns integer as '
 declare
   p_criteria_id         alias for $1;
@@ -190,7 +190,7 @@ begin
 end;' language 'plpgsql';
 
 select define_function_args('recruiting_candidate__new','candidate_id,package_id,address1,address2,city,state,zip,zip_plus_four,country,home_phone,cell_phone,email,status,creation_user,creation_ip');
-create function recruiting_candidate__new(integer,integer,varchar,varchar,varchar,varchar,varchar,varchar,varchar,varchar,varchar,varchar,integer,integer,varchar)
+create or replace function recruiting_candidate__new(integer,integer,varchar,varchar,varchar,varchar,varchar,varchar,varchar,varchar,varchar,varchar,integer,integer,varchar)
 returns integer as '
 declare
   p_candidate_id        alias for $1;
@@ -243,7 +243,7 @@ begin
 end;' language 'plpgsql';
 
 select define_function_args('recruiting_candidate__delete','candidate_id');
-create function recruiting_candidate__delete(integer)
+create or replace function recruiting_candidate__delete(integer)
 returns integer as '
 declare 
   p_candidate_id        alias for $1;
@@ -258,7 +258,7 @@ begin
 end;' language 'plpgsql';
 
 select define_function_args('recruiting_candidate__name','candidate_id');
-create function recruiting_candidate__name(integer)
+create or replace function recruiting_candidate__name(integer)
 returns varchar as '
 declare
   p_candidate_id        alias for $1;
@@ -268,12 +268,12 @@ begin
   v_desc := select last_name||'', ''||first_name from recruiting_candidates 
              where candidate_id = p_candidate_id;
 
-  return v_desc
+  return v_desc;
 
 end;' language 'plpgsql';
 
 select define_function_args('recruiting_interview__new','interview_id,package_id,interviewer_id,candidate_id,creation_user,creation_ip');
-create function recruiting_interview__new(integer,integer,integer,integer,integer,varchar)
+create or replace function recruiting_interview__new(integer,integer,integer,integer,integer,varchar)
 returns integer as '
 declare
   p_interview_id        alias for $1;
@@ -309,7 +309,7 @@ begin
 end;' language 'plpgsql';
 
 select define_function_args('recruiting_interview__delete','interview_id');
-create function recruiting_interview__delete(integer)
+create or replace function recruiting_interview__delete(integer)
 returns integer as '
 declare
   p_interview_id        alias for $1;
@@ -324,7 +324,7 @@ begin
 end;' language 'plpgsql';
 
 select define_function_args('recruiting_interview_name','interview_id');
-create function recruiting_interview__name(integer)
+create or replace function recruiting_interview__name(integer)
 returns varchar as '
 declare
   p_interview_id        alias for $1;
@@ -343,7 +343,7 @@ begin
 end;' language 'plpgsql';
 
 select define_function_args('recruiting_rating__new','rating_id,package_id,interview_id,criteria_id,rating,creation_user,creation_ip');
-create function recruiting_rating__new(integer,integer,integer,integer,integer,integer,varchar)
+create or replace function recruiting_rating__new(integer,integer,integer,integer,integer,integer,varchar)
 returns integer as '
 declare
   p_rating_id           alias for $1;
@@ -381,7 +381,7 @@ begin
 end;' language 'plpgsql';
 
 select define_function_args('recruiting_rating__delete','rating_id');
-create function recruiting_rating__delete(integer)
+create or replace function recruiting_rating__delete(integer)
 returns integer as '
 declare
   p_rating_id           alias for $1;
@@ -396,11 +396,11 @@ begin
 end;' language 'plpgsql';
 
 select define_function_args('recruiting_rating__name','rating_id');
-create function recruiting_rating__name(integer)
+create or replace function recruiting_rating__name(integer)
 returns varchar as '
 declare
   p_rating_id   alias for $1;
-  v_desc        varchar
+  v_desc        varchar;
 begin
 
   v_desc := select u.last_name||'', ''||u.first_name||''''''s ''||rc.criteria_name||'' rating of ''||c.last_name||'', ''||c.first_name
