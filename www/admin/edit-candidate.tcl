@@ -85,6 +85,20 @@ element create edit_candidate country \
         -html {size 30} \
         -value $info(country)
 
+element create edit_candidate home_phone \
+        -label "Home phone:" \
+        -datatype text \
+        -widget text \
+        -html {size 14} \
+        -value [recruiting_candidate::format_phone -phone_number $info(home_phone)]
+
+element create edit_candidate cell_phone \
+        -label "Mobile phone:" \
+        -datatype text \
+        -widget text \
+        -html {size 14} \
+        -value [recruiting_candidate::format_phone -phone_number $info(cell_phone)]
+
 element create edit_candidate email \
         -label "Email:" \
         -datatype text \
@@ -107,6 +121,7 @@ if {[form is_valid edit_candidate]} {
     form get_values edit_candidate \
             first_name last_name \
             address1 address2 city state zip zip_plus_four country \
+            home_phone cell_phone \
             email status    
     
     recruiting_candidate::update_candidate \
@@ -120,6 +135,8 @@ if {[form is_valid edit_candidate]} {
             -zip $zip \
             -zip_plus_four $zip_plus_four \
             -country $country \
+            -home_phone [recruiting_candidate::strip_phone -phone_number $home_phone] \
+            -cell_phone [recruiting_candidate::strip_phone -phone_number $cell_phone] \
             -email $email \
             -status $status \
             -package_id $package_id

@@ -45,10 +45,15 @@ element create rate_sheet should_hire_p \
         -widget radio \
         -options [list [list Yes t] [list No f]]
 
+element create rate_sheet comment \
+        -label "Comments:" \
+        -datatype text \
+        -widget textarea \
+        -html {rows 10 cols 60 wrap soft}
 
 if {[form is_valid rate_sheet]} {
     form get_values rate_sheet \
-            should_hire_p
+            should_hire_p comment
     
     foreach criteria_id $criteria_ids {
         form get_values rate_sheet \
@@ -59,11 +64,12 @@ if {[form is_valid rate_sheet]} {
                 -package_id $package_id \
                 -interview_id $interview_id \
                 -criteria_id $criteria_id \
-                -rating [set criteria_$criteria_id]
+                -rating [set criteria_$criteria_id] \
+                -comment $comment
         }
     }
 
-    db_dml set_should_hire {}
+    db_dml set_should_hire_and_comment {}
 
     ad_returnredirect index
     ad_script_abort

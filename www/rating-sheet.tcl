@@ -38,6 +38,9 @@ table::setTitle summary "Summary Info"
 table::addUnsortedRow summary [list "Average rating:" [db_string get_average_rating {}]]
 table::addUnsortedRow summary [list "Hiring suggestion:" [db_string get_should_hire_p {}]]
 
+table::setTitle comments "Comments"
+table::addUnsortedRow comments [list $interview_info(comment)]
+
 set context_bar [list \
         [list "index" "Recruiting"] \
         [list "my-completed-interviews" "My Completed Interviews"] \

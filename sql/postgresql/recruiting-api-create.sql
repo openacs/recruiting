@@ -181,8 +181,8 @@ begin
 
 end;' language 'plpgsql';
 
-select define_function_args('recruiting_candidate__new','candidate_id,package_id,first_name,last_name,address1,address2,city,state,zip,zip_plus_four,country,email,status,creation_user,creation_ip');
-create function recruiting_candidate__new(integer,integer,varchar,varchar,varchar,varchar,varchar,varchar,varchar,varchar,varchar,varchar,integer,integer,varchar)
+select define_function_args('recruiting_candidate__new','candidate_id,package_id,first_name,last_name,address1,address2,city,state,zip,zip_plus_four,country,home_phone,cell_phone,email,status,creation_user,creation_ip');
+create function recruiting_candidate__new(integer,integer,varchar,varchar,varchar,varchar,varchar,varchar,varchar,varchar,varchar,varchar,varchar,varchar,integer,integer,varchar)
 returns integer as '
 declare
   p_candidate_id        alias for $1;
@@ -196,10 +196,12 @@ declare
   p_zip                 alias for $9;
   p_zip_plus_four       alias for $10;
   p_country             alias for $11;
-  p_email               alias for $12;
-  p_status              alias for $13;
-  p_creation_user       alias for $14;
-  p_creation_ip         alias for $15;
+  p_home_phone          alias for $12;
+  p_cell_phone          alias for $13;
+  p_email               alias for $14;
+  p_status              alias for $15;
+  p_creation_user       alias for $16;
+  p_creation_ip         alias for $17;
   v_candidate_id        integer;
 begin
 
@@ -223,6 +225,8 @@ begin
                zip,
                zip_plus_four,
                country,
+               home_phone,
+               cell_phone,
                email,
                status)
         values(v_candidate_id,
@@ -236,6 +240,8 @@ begin
                p_zip,
                p_zip_plus_four,
                p_country,
+               p_home_phone,
+               p_cell_phone,
                p_email,
                p_status);
 

@@ -168,6 +168,33 @@ namespace eval recruiting_criteria {
 
 namespace eval recruiting_candidate {
 
+    ad_proc -public format_phone {
+        {-phone_number:required}
+    } {
+        this proc takes a 10 digit phone number (which should
+        have only digits, no ()-. characters, and formats it
+        like this: "(123) 456-7890"
+
+        if the input is not a string of ten digits, an empty
+        string is returned
+    } {
+        if {[string length $phone_number] != 10} {
+            return ""
+        } else {
+            return "\([string range $phone_number 0 2]\) [string range $phone_number 3 5]-[string range $phone_number 6 end]"
+        }
+    }
+
+    ad_proc -public strip_phone {
+        {-phone_number:required}
+    } {
+        this proc takes a 10 digit phone number of arbitrary format
+        and strips away ()-., or any other characters
+    } {
+        regsub -all {[^0-9]} $phone_number "" stripped_number
+        return $stripped_number
+    }
+
     ad_proc -public new {
         {-first_name:required}
         {-last_name:required}
@@ -179,6 +206,8 @@ namespace eval recruiting_candidate {
         {-zip_plus_four:required}
         {-country:required}
         {-email:required}
+        {-home_phone:required}
+        {-cell_phone:required}
         {-status:required}
         {-package_id ""}
     } {
@@ -200,9 +229,11 @@ namespace eval recruiting_candidate {
         ns_set put $extra_vars zip $zip
         ns_set put $extra_vars zip_plus_four $zip_plus_four
         ns_set put $extra_vars country $country
+        ns_set put $extra_vars home_phone $home_phone
+        ns_set put $extra_vars cell_phone $cell_phone
         ns_set put $extra_vars email $email
         ns_set put $extra_vars status $status
-
+        
         set object_type "recruiting_candidate"
 
         return [package_instantiate_object -extra_vars $extra_vars $object_type]
@@ -213,9 +244,9 @@ namespace eval recruiting_candidate {
     } {
         delete a recruiting candidate
     } {
-        db_exec_plsql delete_ratings_for_candidate {}
-        db_exec_plsql delete_interviews_for_candidate {}
-        db_exec_plsql delete_candidate {}
+        db_dml delete_ratings_for_candidate {}
+        db_dml delete_interviews_for_candidate {}
+        db_dml delete_candidate {}
     }
 
     ad_proc -public get {
@@ -238,6 +269,8 @@ namespace eval recruiting_candidate {
         set recruiting_candidate(zip) $zip
         set recruiting_candidate(zip_plus_four) $zip_plus_four
         set recruiting_candidate(country) $country
+        set recruiting_candidate(home_phone) $home_phone
+        set recruiting_candidate(cell_phone) $cell_phone
         set recruiting_candidate(email) $email
         set recruiting_candidate(status) $the_status(short_desc)
         
@@ -255,6 +288,8 @@ namespace eval recruiting_candidate {
         {-zip:required}
         {-zip_plus_four:required}
         {-country:required}
+        {-home_phone:required}
+        {-cell_phone:required}
         {-email:required}
         {-status:required}
         {-package_id:required}
@@ -311,6 +346,7 @@ namespace eval recruiting_interview {
         set interview(interviewer_id) $interviewer_id
         set interview(candidate_id) $candidate_id
         set interview(should_hire_p) $should_hire_p
+        set interview(comment) $comment
 
         return [array get interview]
     }

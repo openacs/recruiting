@@ -34,6 +34,9 @@ table::addUnsortedRow summary [list "Interviewed by:" "$interviewer_name<br><a h
 table::addUnsortedRow summary [list "Average rating:" [db_string get_average_rating {}]]
 table::addUnsortedRow summary [list "Hiring suggestion:" [db_string get_should_hire_p {}]]
 
+table::setTitle comments "Comments"
+table::addUnsortedRow comments [list $interview_info(comment)]
+
 set context_bar [list \
         [list "../" "Recruiting"] \
         [list "index" "Admin"] \

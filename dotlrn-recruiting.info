@@ -31,6 +31,8 @@
             <file type="query_file" path="www/admin/assign-candidate-interview.xql"/>
             <file type="content_page" path="www/admin/change-candidate-status.adp"/>
             <file type="content_page" path="www/admin/change-candidate-status.tcl"/>
+            <file type="content_page" path="www/admin/delete-candidate.adp"/>
+            <file type="content_page" path="www/admin/delete-candidate.tcl"/>
             <file type="content_page" path="www/admin/disable-criteria.tcl"/>
             <file type="query_file" path="www/admin/disable-criteria.xql"/>
             <file type="content_page" path="www/admin/disable-status-type.tcl"/>
@@ -71,6 +73,9 @@
             <file type="content_page" path="www/admin/view-average-ratings.adp"/>
             <file type="content_page" path="www/admin/view-average-ratings.tcl"/>
             <file type="query_file" path="www/admin/view-average-ratings.xql"/>
+            <file type="content_page" path="www/admin/view-comments.adp"/>
+            <file type="content_page" path="www/admin/view-comments.tcl"/>
+            <file type="query_file" path="www/admin/view-comments.xql"/>
             <file type="content_page" path="www/admin/view-one-candidate.adp"/>
             <file type="content_page" path="www/admin/view-one-candidate.tcl"/>
             <file type="query_file" path="www/admin/view-one-candidate.xql"/>

@@ -50,9 +50,16 @@ element create rate_sheet should_hire_p \
         -value $interview_info(should_hire_p)
 
 
+element create rate_sheet comment \
+        -label "Comments:" \
+        -datatype text \
+        -widget textarea \
+        -html {rows 10 cols 60 wrap soft} \
+        -value $interview_info(comment)
+
 if {[form is_valid rate_sheet]} {
     form get_values rate_sheet \
-            should_hire_p
+            should_hire_p comment
 
 
     db_dml remove_old_ratings {}
@@ -68,7 +75,7 @@ if {[form is_valid rate_sheet]} {
                 -rating [set criteria_$criteria_id]
     }
 
-    db_dml set_should_hire {}
+    db_dml set_should_hire_and_comment {}
 
     ad_returnredirect index
     ad_script_abort

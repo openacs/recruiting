@@ -12,10 +12,11 @@
         </querytext>
     </fullquery>
 
-    <fullquery name="set_should_hire">
+    <fullquery name="set_should_hire_and_comment">
         <querytext>
              update recruiting_interviews
-                set should_hire_p = :should_hire_p
+                set should_hire_p = :should_hire_p,
+                    comment = :comment
               where interview_id = :interview_id
         </querytext>
     </fullquery>

@@ -74,6 +74,18 @@ element create new_candidate country \
         -widget text \
         -html {size 30}
 
+element create new_candidate home_phone \
+        -label "Home phone:" \
+        -datatype text \
+        -widget text \
+        -html {size 14}
+
+element create new_candidate cell_phone \
+        -label "Mobile phone:" \
+        -datatype text \
+        -widget text \
+        -html {size 14}
+
 element create new_candidate email \
         -label "Email:" \
         -datatype text \
@@ -90,6 +102,7 @@ if {[form is_valid new_candidate]} {
     form get_values new_candidate \
             first_name last_name \
             address1 address2 city state zip zip_plus_four country \
+            home_phone cell_phone \
             email status    
     
     recruiting_candidate::new \
@@ -102,6 +115,8 @@ if {[form is_valid new_candidate]} {
             -zip $zip \
             -zip_plus_four $zip_plus_four \
             -country $country \
+            -home_phone [recruiting_candidate::strip_phone -phone_number $home_phone] \
+            -cell_phone [recruiting_candidate::strip_phone -phone_number $cell_phone] \
             -email $email \
             -status $status
     

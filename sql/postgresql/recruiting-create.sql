@@ -115,6 +115,9 @@ create table recruiting_candidates (
        zip_plus_four               varchar(4),
        country                     varchar(1024),
 
+       home_phone                  varchar(10),
+       cell_phone                  varchar(10),
+
        email                       varchar(1024),
 
        status                      integer
@@ -154,7 +157,8 @@ create table recruiting_interviews (
                                    references users(user_id),
        candidate_id                integer
                                    references recruiting_candidates(candidate_id),
-       should_hire_p               boolean
+       should_hire_p               boolean,
+       comment                     varchar(8000)
 );
 
 select acs_object_type__create_type (
