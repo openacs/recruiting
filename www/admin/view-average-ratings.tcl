@@ -10,7 +10,7 @@ ad_page_contract {
     candidate_id:notnull
 }
 
-array set candidate_info [recruiting_candidate::get -candidate_id $candidate_id]
+array set candidate_info [recruiting::candidate::get -candidate_id $candidate_id]
 
 ui::table::set_title ratings "Average ratings for $candidate_info(first_name) $candidate_info(last_name)"
 ui::table::set_column_headings ratings [list "Criteria" "Average Rating"]
@@ -33,6 +33,7 @@ set context_bar [list \
         "Average Ratings"]
 
 ad_return_template
+
 
 
 

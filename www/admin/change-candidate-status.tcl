@@ -12,7 +12,7 @@ ad_page_contract {
 set package_id [ad_conn package_id]
 set user_id [ad_verify_and_get_user_id]
 
-array set info [recruiting_candidate::get -candidate_id $candidate_id]
+array set info [recruiting::candidate::get -candidate_id $candidate_id]
 
 form create change_status
 element create change_status status \
@@ -39,3 +39,4 @@ if {[form is_valid change_status]} {
 set context_bar [list [list "../" "Recruiting"] [list "index" "Admin"] [list "list-candidates" "Candidates"] [list "view-one-candidate?[export_vars candidate_id]" "One Candidate"] "Change Status"]
 
 ad_return_template
+

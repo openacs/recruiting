@@ -18,7 +18,7 @@ set user_id [ad_verify_and_get_user_id]
 
 if {$delete_p == "notyet"} {
     
-    array set candidate_info [recruiting_candidate::get -candidate_id $candidate_id]
+    array set candidate_info [recruiting::candidate::get -candidate_id $candidate_id]
     array set interview_info [recruiting::interview::get -interview_id $interview_id]
     
     ui::table::set_title delete "Deleting interview for $candidate_info(first_name) $candidate_info(last_name)"
@@ -37,6 +37,7 @@ if {$delete_p == "notyet"} {
     ns_returnredirect [ns_urldecode $referrer]
 
 }
+
 
 
 

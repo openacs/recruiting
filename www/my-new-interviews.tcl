@@ -14,7 +14,7 @@ ui::table::set_title interviews "Candidates for you to interview"
 ui::table::set_column_headings interviews [list "Name" "Location"]
 db_foreach my_new_interviews {} {
     ui::table::add_sortable_row interviews [list "$last_name, $first_name" \
-            "$location<br>Home: [recruiting_candidate::format_phone -phone_number $home_phone]<br>Mobile: [recruiting_candidate::format_phone -phone_number $cell_phone]" \
+            "$location<br>Home: [recruiting::candidate::format_phone -phone_number $home_phone]<br>Mobile: [recruiting::candidate::format_phone -phone_number $cell_phone]" \
             "(<a href=\"rate-candidate?[export_vars {interview_id candidate_id}]\">rate this candidate</a>)"]
 } if_no_rows {
     ui::table::add_sortable_row interviews [list "You don't have any candidates to interview right now."]
@@ -23,6 +23,7 @@ db_foreach my_new_interviews {} {
 set context_bar [list [list "index" "Recruiting"] "My New Interviews"]
 
 ad_return_template
+
 
 
 

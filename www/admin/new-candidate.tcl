@@ -112,7 +112,7 @@ if {[form is_valid new_candidate]} {
             -first_names $first_name \
             -last_name $last_name]
 
-    recruiting_candidate::new \
+    recruiting::candidate::new \
             -candidate_id $person_id \
             -first_name $first_name \
             -last_name $last_name \
@@ -123,8 +123,8 @@ if {[form is_valid new_candidate]} {
             -zip $zip \
             -zip_plus_four $zip_plus_four \
             -country $country \
-            -home_phone [recruiting_candidate::strip_phone -phone_number $home_phone] \
-            -cell_phone [recruiting_candidate::strip_phone -phone_number $cell_phone] \
+            -home_phone [recruiting::candidate::strip_phone -phone_number $home_phone] \
+            -cell_phone [recruiting::candidate::strip_phone -phone_number $cell_phone] \
             -email $email \
             -status $status
     
@@ -135,3 +135,4 @@ if {[form is_valid new_candidate]} {
 set context_bar [list [list "../" "Recruiting"] [list "index" "Admin"] [list "list-candidates" "Candidates"] "New Candidate"]
 
 ad_return_template
+

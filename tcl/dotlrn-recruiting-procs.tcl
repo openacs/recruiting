@@ -276,7 +276,7 @@ namespace eval recruiting {
         } {
             db_1row get_recruiting_candidate {}
 
-            array set the_status [recruiting_status_type::get -status_type_id $status]
+            array set the_status [recruiting::status_type::get -status_type_id $status]
 
             set recruiting_candidate(candidate_id) $candidate_id
             set recruiting_candidate(package_id) $package_id
@@ -423,3 +423,4 @@ namespace eval recruiting {
     }
 
 }
+

@@ -17,7 +17,7 @@ set user_id [ad_verify_and_get_user_id]
 
 if {$archive_p == "notyet"} {
     
-    array set candidate_info [recruiting_candidate::get -candidate_id $candidate_id]
+    array set candidate_info [recruiting::candidate::get -candidate_id $candidate_id]
     
     ui::table::set_title archive "Archiving $candidate_info(first_name) $candidate_info(last_name)"
     ui::table::set_form archive [ns_conn url]
@@ -30,13 +30,14 @@ if {$archive_p == "notyet"} {
 } else {
     
     if {$archive_p == "Yes"} {
-        recruiting_candidate::archive -candidate_id $candidate_id
+        recruiting::candidate::archive -candidate_id $candidate_id
         ns_returnredirect list-candidates
     } else {
         ns_returnredirect [ns_urldecode $referrer]
     }
 
 }
+
 
 
 

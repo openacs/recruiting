@@ -16,7 +16,7 @@ set user_id [ad_verify_and_get_user_id]
 # don't let any candidates be created (what would their
 # status type be)?
 
-array set info [recruiting_candidate::get -candidate_id $candidate_id]
+array set info [recruiting::candidate::get -candidate_id $candidate_id]
 
 form create edit_candidate
 element create edit_candidate first_name \
@@ -91,7 +91,7 @@ element create edit_candidate home_phone \
         -datatype text \
         -widget text \
         -html {size 14} \
-        -value [recruiting_candidate::format_phone -phone_number $info(home_phone)] \
+        -value [recruiting::candidate::format_phone -phone_number $info(home_phone)] \
         -optional
 
 element create edit_candidate cell_phone \
@@ -99,7 +99,7 @@ element create edit_candidate cell_phone \
         -datatype text \
         -widget text \
         -html {size 14} \
-        -value [recruiting_candidate::format_phone -phone_number $info(cell_phone)] \
+        -value [recruiting::candidate::format_phone -phone_number $info(cell_phone)] \
         -optional
 
 element create edit_candidate email \
@@ -127,7 +127,7 @@ if {[form is_valid edit_candidate]} {
             home_phone cell_phone \
             email status    
     
-    recruiting_candidate::update_candidate \
+    recruiting::candidate::update_candidate \
             -candidate_id $candidate_id \
             -first_name $first_name \
             -last_name $last_name \
@@ -138,8 +138,8 @@ if {[form is_valid edit_candidate]} {
             -zip $zip \
             -zip_plus_four $zip_plus_four \
             -country $country \
-            -home_phone [recruiting_candidate::strip_phone -phone_number $home_phone] \
-            -cell_phone [recruiting_candidate::strip_phone -phone_number $cell_phone] \
+            -home_phone [recruiting::candidate::strip_phone -phone_number $home_phone] \
+            -cell_phone [recruiting::candidate::strip_phone -phone_number $cell_phone] \
             -email $email \
             -status $status \
             -package_id $package_id
@@ -151,3 +151,4 @@ if {[form is_valid edit_candidate]} {
 set context_bar [list [list "../" "Recruiting"] [list "index" "Admin"] [list "list-candidates" "Candidates"] "Edit Candidate"]
 
 ad_return_template
+

@@ -15,7 +15,7 @@ set user_id [ad_verify_and_get_user_id]
 
 set referrer [ns_urlencode [ns_conn url]?[export_vars candidate_id]]
 
-array set info [recruiting_candidate::get \
+array set info [recruiting::candidate::get \
         -candidate_id $candidate_id]
 
 
@@ -32,8 +32,8 @@ append address " $info(country)"
 ui::table::set_title candidate "Recruiting Candidate Detail"
 ui::table::add_unsorted_row candidate [list "Name:" "$info(last_name), $info(first_name)"]
 ui::table::add_unsorted_row candidate [list "Address:" "$address"]
-ui::table::add_unsorted_row candidate [list "Home Phone:" "[recruiting_candidate::format_phone -phone_number $info(home_phone)]"]
-ui::table::add_unsorted_row candidate [list "Mobile Phone:" "[recruiting_candidate::format_phone -phone_number $info(cell_phone)]"]
+ui::table::add_unsorted_row candidate [list "Home Phone:" "[recruiting::candidate::format_phone -phone_number $info(home_phone)]"]
+ui::table::add_unsorted_row candidate [list "Mobile Phone:" "[recruiting::candidate::format_phone -phone_number $info(cell_phone)]"]
 ui::table::add_unsorted_row candidate [list "Status:" "$info(status) (<a href=change-candidate-status?candidate_id=$info(candidate_id)>change status</a>)"]
 
 set possible_ratings [db_string get_num_criteria {}]
@@ -78,6 +78,7 @@ ui::table::add_unsorted_row resume [list "No resume uploaded.  (<a href=\"$attac
 set context_bar [list [list "../" "Recruiting"] [list "index" "Admin"] [list "list-candidates" "Candidates"] "One Candidate"]
 
 ad_return_template
+
 
 
 

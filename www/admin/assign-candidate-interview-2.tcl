@@ -18,7 +18,7 @@ set package_url [site_node::get_url -node_id $node_id]
 
 set user_id [ad_verify_and_get_user_id]
 
-array set candidate_info [recruiting_candidate::get -candidate_id $candidate_id]
+array set candidate_info [recruiting::candidate::get -candidate_id $candidate_id]
 
 set candidate_name [person::name -person_id $candidate_id]
 set url "[ad_parameter -package_id [ad_acs_kernel_id] SystemURL ""]$package_url"
@@ -69,6 +69,7 @@ if {[form is_valid msg]} {
 set context_bar [list [list "../" "Recruiting"] [list "index" "Admin"] [list "list-candidates" "Candidates"] [list "view-one-candidate?[export_vars candidate_id]" "One Candidate"] "Assign Interview"]
 
 ad_return_template
+
 
 
 

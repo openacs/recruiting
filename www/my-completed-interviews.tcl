@@ -15,7 +15,7 @@ ui::table::set_column_headings interviews [list "Name" "Location" "Average Ratin
 ui::table::set_column_alignment interviews [list left left center center]
 db_foreach my_completed_interviews {} {
     ui::table::add_sortable_row interviews [list "$last_name, $first_name" \
-            "$location<br>Home: [recruiting_candidate::format_phone -phone_number $home_phone]<br>Mobile: [recruiting_candidate::format_phone -phone_number $cell_phone]" \
+            "$location<br>Home: [recruiting::candidate::format_phone -phone_number $home_phone]<br>Mobile: [recruiting::candidate::format_phone -phone_number $cell_phone]" \
             "$average_rating" \
             "$should_hire_p" \
             "(<a href=\"rating-sheet?[export_vars interview_id]\">view my ratings</a>) (<a href=edit-ratings?[export_vars {candidate_id interview_id}]>modify interview</a>)"]
@@ -26,6 +26,7 @@ db_foreach my_completed_interviews {} {
 set context_bar [list [list "index" "Recruiting"] "My Completed Interviews"]
 
 ad_return_template
+
 
 
 
