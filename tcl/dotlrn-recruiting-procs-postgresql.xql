@@ -25,6 +25,17 @@
         </querytext>
     </fullquery>
 
+    <fullquery name="recruiting_status_type::set_status_type.update_status_type">
+        <querytext>
+            update recruiting_status_types
+               set short_desc = :short_desc,
+                   long_desc = :long_desc,
+                   enabled_p = :enabled_p,
+                   package_id = :package_id
+             where status_type_id = :status_type_id
+        </querytext>
+    </fullquery>
+
     <fullquery name="recruiting_criteria::disable.disable_criteria">
         <querytext>
             select recruiting_criteria__disable(:criteria_id);
@@ -45,6 +56,16 @@
                    enabled_p
               from recruiting_criteria
              where criteria_id = :criteria_id;
+        </querytext>
+    </fullquery>
+
+    <fullquery name="recruiting_criteria::update_criteria_type.update_criteria">
+        <querytext>
+            update recruiting_criteria
+               set package_id = :package_id,
+                   criteria_name = :criteria_name,
+                   description = :description
+             where criteria_id = :criteria_id
         </querytext>
     </fullquery>
 

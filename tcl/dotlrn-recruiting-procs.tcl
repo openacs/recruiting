@@ -68,7 +68,7 @@ namespace eval recruiting_status_type {
     }
 
     ad_proc -public get {
-        {-message_id required}
+        {-status_type_id:required}
     } {
         get a status type
     } {
@@ -82,7 +82,18 @@ namespace eval recruiting_status_type {
 
         return [array get status_type]
     }
-
+    
+    ad_proc -public update_status_type {
+        {-status_type_id:required}
+        {-package_id ""}
+        {-short_desc:required}
+        {-long_desc:required}
+        {-enabled_p "t"}
+    } {
+        set a status type
+    } {
+        db_dml update_status_type {}
+    }
 }
 
 namespace eval recruiting_criteria {
@@ -142,6 +153,17 @@ namespace eval recruiting_criteria {
         return [array get recruiting_criteria]
     }
 
+    ad_proc -public update_criteria_type {
+        {-criteria_id:required}
+        {-criteria_name:required}
+        {-description:required}
+        {-enabled_p:required}
+        {-package_id ""}
+    } {
+        update a criteria type
+    } {
+        db_dml update_criteria {}
+    }
 }
 
 namespace eval recruiting_candidate {
@@ -166,7 +188,7 @@ namespace eval recruiting_candidate {
         if {[empty_string_p $package_id]} {
             set package_id [ad_conn package_id]
         }
-        
+
         set extra_vars [ns_set create]
         ns_set put $extra_vars package_id $package_id
         ns_set put $extra_vars first_name $first_name
@@ -197,10 +219,18 @@ namespace eval recruiting_candidate {
     }
 
     ad_proc -public get {
-        db_1row get_recruiting_candidate
+        {-candidate_id:required}
+    } {
+        get a candidate 
+    } {
+        db_1row get_recruiting_candidate {}
+
+        array set the_status [recruiting_status_type::get -status_type_id $status]
+
         set recruiting_candidate(candidate_id) $candidate_id
         set recruiting_candidate(package_id) $package_id
         set recruiting_candidate(first_name) $first_name
+        set recruiting_candidate(last_name) $last_name
         set recruiting_candidate(address1) $address1
         set recruiting_candidate(address2) $address2
         set recruiting_candidate(city) $city
@@ -209,7 +239,7 @@ namespace eval recruiting_candidate {
         set recruiting_candidate(zip_plus_four) $zip_plus_four
         set recruiting_candidate(country) $country
         set recruiting_candidate(email) $email
-        set recruiting_candidate(status) $status
+        set recruiting_candidate(status) $the_status(short_desc)
         
         return [array get recruiting_candidate]
     }
