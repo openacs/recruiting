@@ -28,7 +28,6 @@ db_foreach get_candidates {} {
 
 table::setTitle options "Options"
 table::addUnsortedRow options [list "<a href=new-candidate>Add a new candidate</a>"]
-table::addUnsortedRow options [list "<a href=list-archived-candidates>View archived candidates</a>"]
 
 set context_bar [list [list "../" "Recruiting"] [list "index" "Admin"] "Candidates"]
 

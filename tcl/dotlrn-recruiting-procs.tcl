@@ -196,6 +196,7 @@ namespace eval recruiting_candidate {
     }
 
     ad_proc -public new {
+        {-candidate_id:required}
         {-first_name:required}
         {-last_name:required}
         {-address1:required}
@@ -219,6 +220,7 @@ namespace eval recruiting_candidate {
         }
 
         set extra_vars [ns_set create]
+        ns_set put $extra_vars candidate_id $candidate_id
         ns_set put $extra_vars package_id $package_id
         ns_set put $extra_vars first_name $first_name
         ns_set put $extra_vars last_name $last_name
@@ -247,6 +249,22 @@ namespace eval recruiting_candidate {
         db_dml delete_ratings_for_candidate {}
         db_dml delete_interviews_for_candidate {}
         db_dml delete_candidate {}
+    }
+
+    ad_proc -public archive {
+        {-candidate_id:required}
+    } {
+        archive a candidate
+    } {
+        db_dml archive_candidate {}
+    }
+
+    ad_proc -public unarchive {
+        {-candidate_id:required}
+    } {
+        unarchive a candidate
+    } {
+        db_dml unarchive_candidate {}
     }
 
     ad_proc -public get {
@@ -296,6 +314,11 @@ namespace eval recruiting_candidate {
     } {
         update a candidate
     } {
+        person::update \
+                -person_id $candidate_id \
+                -first_names $first_name \
+                -last_name $last_name
+
         db_dml update_candidate {}
     }
 

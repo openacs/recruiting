@@ -71,7 +71,9 @@ declare
   p_status_type_id      alias for $1;
 begin
 
-  update recruiting_status_types set enabled_p=''f'' where status_type_id = p_status_type_id;
+  update recruiting_status_types 
+     set enabled_p=''f'' 
+   where status_type_id = p_status_type_id;
   
   return 1;
 
@@ -84,7 +86,9 @@ declare
   p_status_type_id      alias for $1;
 begin
 
-  update recruiting_status_types set enabled_p=''t'' where status_type_id = p_status_type_id;
+  update recruiting_status_types 
+     set enabled_p=''t'' 
+   where status_type_id = p_status_type_id;
   
   return 1;
 
@@ -149,7 +153,9 @@ declare
   p_criteria_id         alias for $1;
 begin
 
-  update recruiting_criteria set enabled_p=''f'' where criteria_id = p_criteria_id;
+  update recruiting_criteria 
+     set enabled_p=''f'' 
+  where criteria_id = p_criteria_id;
 
   return 1;
 
@@ -162,7 +168,9 @@ declare
   p_criteria_id         alias for $1;
 begin
 
-  update recruiting_criteria set enabled_p=''t'' where criteria_id = p_criteria_id;
+  update recruiting_criteria 
+     set enabled_p=''t'' 
+   where criteria_id = p_criteria_id;
 
   return 1;
 
@@ -181,43 +189,30 @@ begin
 
 end;' language 'plpgsql';
 
-select define_function_args('recruiting_candidate__new','candidate_id,package_id,first_name,last_name,address1,address2,city,state,zip,zip_plus_four,country,home_phone,cell_phone,email,status,creation_user,creation_ip');
-create function recruiting_candidate__new(integer,integer,varchar,varchar,varchar,varchar,varchar,varchar,varchar,varchar,varchar,varchar,varchar,varchar,integer,integer,varchar)
+select define_function_args('recruiting_candidate__new','candidate_id,package_id,address1,address2,city,state,zip,zip_plus_four,country,home_phone,cell_phone,email,status,creation_user,creation_ip');
+create function recruiting_candidate__new(integer,integer,varchar,varchar,varchar,varchar,varchar,varchar,varchar,varchar,varchar,varchar,integer,integer,varchar)
 returns integer as '
 declare
   p_candidate_id        alias for $1;
   p_package_id          alias for $2;
-  p_first_name          alias for $3;
-  p_last_name           alias for $4;
-  p_address1            alias for $5;
-  p_address2            alias for $6;
-  p_city                alias for $7;
-  p_state               alias for $8;
-  p_zip                 alias for $9;
-  p_zip_plus_four       alias for $10;
-  p_country             alias for $11;
-  p_home_phone          alias for $12;
-  p_cell_phone          alias for $13;
-  p_email               alias for $14;
-  p_status              alias for $15;
-  p_creation_user       alias for $16;
-  p_creation_ip         alias for $17;
-  v_candidate_id        integer;
+  p_address1            alias for $3;
+  p_address2            alias for $4;
+  p_city                alias for $5;
+  p_state               alias for $6;
+  p_zip                 alias for $7;
+  p_zip_plus_four       alias for $8;
+  p_country             alias for $9;
+  p_home_phone          alias for $10;
+  p_cell_phone          alias for $11;
+  p_email               alias for $12;
+  p_status              alias for $13;
+  p_creation_user       alias for $14;
+  p_creation_ip         alias for $15;
 begin
 
-  v_candidate_id := acs_object__new(
-                 p_candidate_id,
-                 ''recruiting_candidate'',
-                 now(),
-                 p_creation_user,
-                 p_creation_ip,
-                 p_package_id);
-
-   insert into recruiting_candidates
+   insert into recruiting_candidates_all
               (candidate_id,
                package_id,
-               first_name,
-               last_name,
                address1,
                address2,
                city,
@@ -229,10 +224,8 @@ begin
                cell_phone,
                email,
                status)
-        values(v_candidate_id,
+        values(p_candidate_id,
                p_package_id,
-               p_first_name,
-               p_last_name,
                p_address1,
                p_address2,
                p_city,
@@ -245,7 +238,7 @@ begin
                p_email,
                p_status);
 
-  return v_candidate_id;
+  return p_candidate_id;
 
 end;' language 'plpgsql';
 
@@ -258,7 +251,7 @@ begin
 
   delete from recruiting_candidates where candidate_id = p_candidate_id;
 
-  perform acs_object__delete(p_candidate_id);
+  perform person__delete(p_candidate_id);
 
   return 1;
 

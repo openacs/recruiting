@@ -27,15 +27,22 @@
 
 \i recruiting-api-drop.sql
 
+delete from acs_objects where object_type = 'recruiting_rating';
+delete from acs_objects where object_type = 'recruiting_interview';
+delete from acs_objects where object_type = 'recruiting_candidate';
+delete from acs_objects where object_type = 'recruiting_criteria';
+delete from acs_objects where object_type = 'recruiting_status_type';
+
 select acs_object_type__drop_type('recruiting_rating', 't');
 select acs_object_type__drop_type('recruiting_interview', 't');
 select acs_object_type__drop_type('recruiting_candidate', 't');
 select acs_object_type__drop_type('recruiting_criteria', 't');
 select acs_object_type__drop_type('recruiting_status_type', 't');
 
-
 drop table recruiting_ratings;
 drop table recruiting_interviews;
-drop table recruiting_candidates;
+drop view recruiting_candidates;
+drop view archived_recruiting_candidates;
+drop table recruiting_candidates_all;
 drop table recruiting_criteria;
 drop table recruiting_status_types;

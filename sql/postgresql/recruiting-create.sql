@@ -91,11 +91,11 @@ select acs_object_type__create_type (
        'recruiting_criteria__name'
 );
 
-create table recruiting_candidates (
+create table recruiting_candidates_all (
        -- this is a full fledged acs_object
        candidate_id                integer
                                    constraint recruiting_candidate_id_fk
-                                   references acs_objects(object_id)
+                                   references persons(person_id)
                                    constraint recruiting_candidate_pk
                                    primary key,
        package_id                  integer
@@ -105,8 +105,6 @@ create table recruiting_candidates (
                                    not null,
 
        -- address info
-       first_name                  varchar(256),
-       last_name                   varchar(256),
        address1                    varchar(2048),
        address2                    varchar(2048),
        city                        varchar(1024),
@@ -124,14 +122,55 @@ create table recruiting_candidates (
                                    constraint recruiting_status_fk
                                    references recruiting_status_types(status_type_id)
                                    constraint recruiting_status_nn
-                                   not null
+                                   not null,
+       archived_p                  boolean default 'f'
 );
+
+create view recruiting_candidates as
+       select c.candidate_id,
+              c.package_id,
+              p.first_names as first_name,
+              p.last_name,
+              c.address1,
+              c.address2,
+              c.city, c.state,
+              c.zip,
+              c.zip_plus_four,
+              c.country,
+              c.home_phone,
+              c.cell_phone,
+              c.email,
+              c.status              
+         from recruiting_candidates_all c,
+              persons p
+        where c.candidate_id = p.person_id
+          and c.archived_p = 'f';
+
+create view archived_recruiting_candidates as
+       select c.candidate_id,
+              c.package_id,
+              p.first_names as first_name,
+              p.last_name,
+              c.address1,
+              c.address2,
+              c.city, c.state,
+              c.zip,
+              c.zip_plus_four,
+              c.country,
+              c.home_phone,
+              c.cell_phone,
+              c.email,
+              c.status              
+         from recruiting_candidates_all c,
+              persons p
+        where c.candidate_id = p.person_id
+          and c.archived_p = 't';
 
 select acs_object_type__create_type (
        'recruiting_candidate',
        'Recruiting Candidate',
        'Recruiting Candidates',
-       'acs_object',
+       'person',
        'recruiting_candidates',
        'candidate_id',
        'recruiting_candidate',
@@ -156,7 +195,7 @@ create table recruiting_interviews (
        interviewer_id              integer 
                                    references users(user_id),
        candidate_id                integer
-                                   references recruiting_candidates(candidate_id),
+                                   references recruiting_candidates_all(candidate_id),
        should_hire_p               boolean,
        comment                     varchar(8000)
 );

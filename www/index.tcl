@@ -16,16 +16,12 @@ table::setTitle summary "Your Recruiting Summary"
 
 if {$new_interviews} {
     table::addUnsortedRow summary [list "You have <a href=my-new-interviews><b>$new_interviews</b> new interviews</a> to complete."]
+} else {
+    table::addUnsortedRow summary [list "You don't have any new interviews to complete."]
 }
+
 if {$old_interviews} {
-    table::addUnsortedRow summary [list "You have <a href=my-completed-interviews><b>$old_interviews</b> completed interviews</a>."]
+    table::addUnsortedRow summary [list "You may view your $old_interviews <a href=my-completed-interviews>completed interviews</a>."]
 }
-
-if {!($old_interviews || $new_interviews)} {
-    table::addUnsortedRow summary [list "You have no recruiting summary."]
-}
-
-table::setTitle options "Options"
-table::addUnsortedRow options [list "There are currently no options"]
 
 set context_bar [list "Recruiting"]

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<queryset>
+
+    <fullquery name="status_types_defined_p">
+        <querytext>
+        </querytext>
+    </fullquery>
+
+</queryset>

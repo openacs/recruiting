@@ -108,7 +108,12 @@ if {[form is_valid new_candidate]} {
             home_phone cell_phone \
             email status    
     
+    set person_id [person::new \
+            -first_names $first_name \
+            -last_name $last_name]
+
     recruiting_candidate::new \
+            -candidate_id $person_id \
             -first_name $first_name \
             -last_name $last_name \
             -address1 $address1 \
@@ -123,7 +128,7 @@ if {[form is_valid new_candidate]} {
             -email $email \
             -status $status
     
-    ad_returnredirect list-candidates
+    ns_returnredirect list-candidates
     ad_script_abort
 }
 

@@ -25,7 +25,7 @@
         </querytext>
     </fullquery>
 
-    <fullquery name="recruiting_status_type::set_status_type.update_status_type">
+    <fullquery name="recruiting_status_type::update_status_type.update_status_type">
         <querytext>
             update recruiting_status_types
                set short_desc = :short_desc,
@@ -86,7 +86,23 @@
    
     <fullquery name="recruiting_candidate::delete.delete_candidate">
         <querytext>
-            delete from recruiting_candidates
+            delete from recruiting_candidates_all
+                  where candidate_id = :candidate_id
+        </querytext>
+    </fullquery>
+   
+    <fullquery name="recruiting_candidate::archive.archive_candidate">
+        <querytext>
+           update recruiting_candidates_all
+              set archived_p = 't'
+                  where candidate_id = :candidate_id
+        </querytext>
+    </fullquery>
+   
+    <fullquery name="recruiting_candidate::unarchive.unarchive_candidate">
+        <querytext>
+           update recruiting_candidates_all
+              set archived_p = 'f'
                   where candidate_id = :candidate_id
         </querytext>
     </fullquery>
@@ -116,10 +132,8 @@
    
     <fullquery name="recruiting_candidate::update_candidate.update_candidate">
         <querytext>
-            update recruiting_candidates
-               set first_name = :first_name,
-                   last_name = :last_name,
-                   address1 = :address1,
+            update recruiting_candidates_all
+               set address1 = :address1,
                    address2 = :address2,
                    city = :city,
                    state = :state,

@@ -6,9 +6,13 @@
                   p.person_id,
                   p.first_names,
                   p.last_name,
-                  (select count(*) 
-                     from recruiting_ratings r
-                    where r.interview_id = i.interview_id) as num_ratings
+                  (CASE
+                     WHEN (select count(*) 
+                             from recruiting_ratings r
+                            where r.interview_id = i.interview_id) = 0
+                     THEN 'No'
+                     ELSE 'Yes'
+                  END) as completed_p
              from persons p,
                   recruiting_interviews i
             where i.interviewer_id = p.person_id

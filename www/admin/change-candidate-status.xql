@@ -3,7 +3,7 @@
 
    <fullquery name="update_status">
        <querytext>
-           update recruiting_candidates
+           update recruiting_candidates_all
               set status = :status
             where candidate_id = :candidate_id
        </querytext>

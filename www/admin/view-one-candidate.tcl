@@ -41,19 +41,17 @@ set possible_ratings [db_string get_num_criteria {}]
 table::setTitle interviews "Interviews for this candidate"
 table::setColumnHeadings interviews [list \
         "Interviewer" \
-        "Ratings" \
+        "Completed?" \
         "Average Rating" \
         "Recommends Hiring"
 ]
 
-table::setColumnAlignment interviews [list left left center center]
-
+table::setColumnAlignment interviews [list left center center center]
 table::setExportVars interviews [export_vars candidate_id]
-
 db_foreach get_interviews {} {
     table::addUnsortedRow interviews [list \
             "$last_name, $first_names" \
-            "$num_ratings out of $possible_ratings" \
+            "$completed_p" \
             "[db_string get_average_rating {}]" \
             "[db_string get_should_hire_p {}]" \
             "(<a href=view-ratings?[export_vars interview_id]>view ratings</a>)
@@ -68,7 +66,14 @@ table::setTitle options "Options"
 table::addUnsortedRow options [list "<a href=edit-candidate?[export_vars candidate_id]>Edit Information</a>"]
 table::addUnsortedRow options [list "<a href=change-candidate-status?[export_vars candidate_id]>Change Status</a>"]
 table::addUnsortedRow options [list "<a href=assign-candidate-interview?[export_vars candidate_id]>Assign Interview</a>"]
+table::addUnsortedRow options [list "<a href=archive-candidate?[export_vars {candidate_id referrer}]>Archive this candidate</a>"]
 table::addUnsortedRow options [list "<a href=delete-candidate?[export_vars {candidate_id referrer}]>Delete this candidate</a>"]
+
+set attach_url [attachments::add_attachment_url -object_id $candidate_id -return_url "[ns_conn url]?[export_vars candidate_id]"]
+
+table::setTitle resume "Resume"
+table::addUnsortedRow resume [list "No resume uploaded.  (<a href=\"$attach_url\">upload a resume</a>)"]
+
 
 set context_bar [list [list "../" "Recruiting"] [list "index" "Admin"] [list "list-candidates" "Candidates"] "One Candidate"]
 
