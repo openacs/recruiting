@@ -153,7 +153,8 @@ create table recruiting_interviews (
        interviewer_id              integer 
                                    references users(user_id),
        candidate_id                integer
-                                   references recruiting_candidates(candidate_id)
+                                   references recruiting_candidates(candidate_id),
+       should_hire_p               boolean
 );
 
 select acs_object_type__create_type (
@@ -190,7 +191,8 @@ create table recruiting_ratings (
                                    references recruiting_criteria(criteria_id),
        rating                      integer
                                    constraint recruiting_rating_range
-                                   check (rating between 1 and 5)
+                                   check (rating between 1 and 5),
+       unique (package_id,interview_id,criteria_id)
 );
 
 select acs_object_type__create_type (

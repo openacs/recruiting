@@ -35,14 +35,28 @@ table::addUnsortedRow candidate [list "Status:" "$info(status) (<a href=change-c
 set possible_ratings [db_string get_num_criteria {}]
 
 table::setTitle interviews "Interviews for this candidate"
-table::setColumnHeadings interviews [list "Interviewer" "Ratings"]
+table::setColumnHeadings interviews [list \
+        "Interviewer" \
+        "Ratings" \
+        "Average Rating" \
+        "Recommends Hiring"
+]
+
+table::setColumnAlignment interviews [list left left center center]
+
 table::setExportVars interviews [export_vars candidate_id]
 
 db_foreach get_interviews {} {
-    table::addUnsortedRow interviews [list "$last_name, $first_names" "$num_ratings out of $possible_ratings" "(<a href=view-ratings?[export_vars interview_id]>view ratings</a>)"]
+    table::addUnsortedRow interviews [list \
+            "$last_name, $first_names" \
+            "$num_ratings out of $possible_ratings" \
+            "[db_string get_average_rating {}]" \
+            "[db_string get_should_hire_p {}]" \
+            "(<a href=view-ratings?[export_vars interview_id]>view ratings</a>)"]
 } if_no_rows {
     table::addUnsortedRow interviews [list "No Interviews assigned. (<a href=assign-candidate-interview?[export_vars candidate_id]>assign one</a>)"]
 }
+table::addUnsortedRow interviews [list "" "" "" "" "(<a href=view-average-ratings?[export_vars candidate_id]>view average ratings</a>)"]
 
 table::setTitle options "Options"
 table::addUnsortedRow options [list "<a href=edit-candidate?[export_vars candidate_id]>Edit Information</a>"]

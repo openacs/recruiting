@@ -15,7 +15,11 @@ table::setTitle candidates "Recruiting Candidates"
 table::setColumnHeadings candidates [list "Name" "Location" "Status" "Interviews"]
 table::setColumnAlignment candidates [list left left left center left]
 db_foreach get_candidates {} {
-    table::addSortableRow candidates [list "$first_name $last_name<br>(<a href=\"mailto:$email\">$email</a>)" "$city, $state" "$status" "$num_completed_interviews out of $num_interviews<br>completed" "(<a href=\"view-one-candidate?[export_vars candidate_id]\">details</a>)"]
+    table::addSortableRow candidates [list "$first_name $last_name<br>(<a href=\"mailto:$email\">$email</a>)" \
+            "$city, $state" \
+            "$status" \
+            "$num_completed_interviews out of $num_interviews<br>completed" \
+            "(<a href=\"view-one-candidate?[export_vars candidate_id]\">details</a>)"]
 } if_no_rows {
     table::addSortableRow candidates [list "No Candidates"]
 }

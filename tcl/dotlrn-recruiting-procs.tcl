@@ -308,10 +308,11 @@ namespace eval recruiting_interview {
 
         set interview(interview_id) $interview_id
         set interview(package_id) $package_id
-        set interview(interviewere_id) $interviewer_id
+        set interview(interviewer_id) $interviewer_id
         set interview(candidate_id) $candidate_id
+        set interview(should_hire_p) $should_hire_p
 
-        return [ns_set get interview]
+        return [array get interview]
     }
 }
 

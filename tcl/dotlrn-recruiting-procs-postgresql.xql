@@ -148,7 +148,8 @@
         <querytext>
             select package_id,
                    interviewer_id,
-                   candidate_id
+                   candidate_id,
+                   should_hire_p
               from recruiting_interviews
              where interview_id = :interview_id;
         </querytext>

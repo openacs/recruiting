@@ -25,4 +25,26 @@
        </querytext>
    </fullquery>
 
+   <fullquery name="get_should_hire_p">
+       <querytext>
+             select (CASE
+                      WHEN i.should_hire_p = 't'
+                      THEN 'Yes'
+                      WHEN i.should_hire_p = 'f'
+                      THEN 'No'
+                     END) as should_hire_p                  
+              from recruiting_interviews i
+             where i.interview_id = :interview_id
+       </querytext>
+   </fullquery>
+
+   <fullquery name="get_average_rating">
+       <querytext>
+             select round(avg(r.rating),1) as rating
+               from recruiting_ratings r
+              where r.interview_id = recruiting_interviews.interview_id
+                and recruiting_interviews.interview_id = :interview_id
+       </querytext>
+   </fullquery>
+
 </queryset>
