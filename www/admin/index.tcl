@@ -15,13 +15,13 @@ db_1row status_types_defined_p {}
 db_1row criteria_defined_p {}
 
 if {!$status_types_defined_p} {
-    set status_types_msg "<br><font color=red>There are no status types defined.  You must defined status types before you can add and adminster candidates.</font>"
+    set status_types_msg "<br><font color=red>There are no status types defined.  You must define status types before you can add and adminster candidates.</font>"
 } else {
     set status_types_msg ""
 }
 
 if {!$criteria_defined_p} {
-    set criteria_msg "<br><font color=red>No interviews criteria has been defined.  You should define some interview criteria before you begin assigning interviews.</font>"
+    set criteria_msg "<br><font color=red>No interview criteria has been defined.  You should define some interview criteria before you begin assigning interviews.</font>"
 } else {
     set criteria_msg ""
 }
