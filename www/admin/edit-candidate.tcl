@@ -75,29 +75,32 @@ element create edit_candidate zip_plus_four \
         -datatype text \
         -widget text \
         -html {size 4} \
-        -optional \
-        -value $info(zip_plus_four)
+        -value $info(zip_plus_four) \
+        -optional
 
 element create edit_candidate country \
         -label "Country:" \
         -datatype text \
         -widget text \
         -html {size 30} \
-        -value $info(country)
+        -value $info(country) \
+        -optional
 
 element create edit_candidate home_phone \
         -label "Home phone:" \
         -datatype text \
         -widget text \
         -html {size 14} \
-        -value [recruiting_candidate::format_phone -phone_number $info(home_phone)]
+        -value [recruiting_candidate::format_phone -phone_number $info(home_phone)] \
+        -optional
 
 element create edit_candidate cell_phone \
         -label "Mobile phone:" \
         -datatype text \
         -widget text \
         -html {size 14} \
-        -value [recruiting_candidate::format_phone -phone_number $info(cell_phone)]
+        -value [recruiting_candidate::format_phone -phone_number $info(cell_phone)] \
+        -optional
 
 element create edit_candidate email \
         -label "Email:" \

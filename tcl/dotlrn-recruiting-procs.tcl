@@ -330,8 +330,8 @@ namespace eval recruiting_interview {
     } {
         delete an interview
     } {
-        db_exec_plsql delete_ratings {}
-        db_exec_plsql delete_interview {}
+        db_dml delete_ratings {}
+        db_dml delete_interview {}
     }
 
     ad_proc -public get {
@@ -381,7 +381,7 @@ namespace eval recruiting_rating {
     } {
         delete a rating
     } {
-        db_exec_plsql delete_rating {}
+        db_dml delete_rating {}
     }
 
     ad_proc -public get {

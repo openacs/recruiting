@@ -64,8 +64,7 @@ if {[form is_valid rate_sheet]} {
                 -package_id $package_id \
                 -interview_id $interview_id \
                 -criteria_id $criteria_id \
-                -rating [set criteria_$criteria_id] \
-                -comment $comment
+                -rating [set criteria_$criteria_id]
         }
     }
 

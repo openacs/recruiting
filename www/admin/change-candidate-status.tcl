@@ -30,25 +30,12 @@ if {[form is_valid change_status]} {
     form get_values change_status \
             status    
     
-    recruiting_candidate::update_candidate \
-            -candidate_id $info(candidate_id) \
-            -first_name $info(first_name) \
-            -last_name $info(last_name) \
-            -address1 $info(address1) \
-            -address2 $info(address2) \
-            -city $info(city) \
-            -state $info(state) \
-            -zip $info(zip) \
-            -zip_plus_four $info(zip_plus_four) \
-            -country $info(country) \
-            -email $info(email) \
-            -status $status \
-            -package_id $package_id
-    
+    db_dml update_status {}
+
     ad_returnredirect view-one-candidate?[export_vars candidate_id]
     ad_script_abort
 }
 
-set context_bar [list [list "../" "Recruiting"] [list "index" "Admin"] [list "list-candidates" "Candidates"] [list "view-one-candidate?[export_vars candidate_id]"] "Change Status"]
+set context_bar [list [list "../" "Recruiting"] [list "index" "Admin"] [list "list-candidates" "Candidates"] [list "view-one-candidate?[export_vars candidate_id]" "One Candidate"] "Change Status"]
 
 ad_return_template

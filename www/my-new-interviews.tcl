@@ -13,7 +13,9 @@ set user_id [ad_verify_and_get_user_id]
 table::setTitle interviews "Candidates for you to interview"
 table::setColumnHeadings interviews [list "Name" "Location"]
 db_foreach my_new_interviews {} {
-    table::addSortableRow interviews [list "$last_name, $first_name" "$location" "(<a href=\"rate-candidate?[export_vars {interview_id candidate_id}]\">rate this candidate</a>)"]
+    table::addSortableRow interviews [list "$last_name, $first_name" \
+            "$location<br>Home: [recruiting_candidate::format_phone -phone_number $home_phone]<br>Mobile: [recruiting_candidate::format_phone -phone_number $cell_phone]" \
+            "(<a href=\"rate-candidate?[export_vars {interview_id candidate_id}]\">rate this candidate</a>)"]
 } if_no_rows {
     table::addSortableRow interviews [list "You don't have any candidates to interview right now."]
 }

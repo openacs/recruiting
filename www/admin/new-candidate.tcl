@@ -72,19 +72,22 @@ element create new_candidate country \
         -label "Country:" \
         -datatype text \
         -widget text \
-        -html {size 30}
+        -html {size 30} \
+        -optional
 
 element create new_candidate home_phone \
         -label "Home phone:" \
         -datatype text \
         -widget text \
-        -html {size 14}
+        -html {size 14} \
+        -optional
 
 element create new_candidate cell_phone \
         -label "Mobile phone:" \
         -datatype text \
         -widget text \
-        -html {size 14}
+        -html {size 14} \
+        -optional
 
 element create new_candidate email \
         -label "Email:" \

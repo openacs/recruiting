@@ -8,7 +8,7 @@
                    c.last_name,
                    c.first_name,
                    c.email,
-                   -- c.phone_number,
+                   c.home_phone, c.cell_phone,
                    c.city||', '||c.state||' '||c.country as location
               from recruiting_interviews i,
                    recruiting_candidates c

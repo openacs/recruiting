@@ -10,6 +10,7 @@
                    c.email,
                    -- c.phone_number,
                    c.city||', '||c.state||' '||c.country as location,
+                   c.home_phone, c.cell_phone,
                    round((select avg(r.rating)
                                from recruiting_ratings r
                               where interview_id = i.interview_id),1) as average_rating,

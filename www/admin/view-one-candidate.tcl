@@ -56,7 +56,9 @@ db_foreach get_interviews {} {
             "$num_ratings out of $possible_ratings" \
             "[db_string get_average_rating {}]" \
             "[db_string get_should_hire_p {}]" \
-            "(<a href=view-ratings?[export_vars interview_id]>view ratings</a>) (<a href=view-comments?[export_vars candidate_id]>view comments</a>)"]
+            "(<a href=view-ratings?[export_vars interview_id]>view ratings</a>)
+    (<a href=view-comments?[export_vars candidate_id]>view comments</a>)
+    (<a href=delete-interview?[export_vars {interview_id candidate_id referrer}]>delete</a>)"]
 } if_no_rows {
     table::addUnsortedRow interviews [list "No Interviews assigned. (<a href=assign-candidate-interview?[export_vars candidate_id]>assign one</a>)"]
 }
