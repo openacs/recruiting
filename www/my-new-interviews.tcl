@@ -10,16 +10,20 @@ ad_page_contract {
 set package_id [ad_conn package_id]
 set user_id [ad_verify_and_get_user_id]
 
-table::setTitle interviews "Candidates for you to interview"
-table::setColumnHeadings interviews [list "Name" "Location"]
+ui::table::set_title interviews "Candidates for you to interview"
+ui::table::set_column_headings interviews [list "Name" "Location"]
 db_foreach my_new_interviews {} {
-    table::addSortableRow interviews [list "$last_name, $first_name" \
+    ui::table::add_sortable_row interviews [list "$last_name, $first_name" \
             "$location<br>Home: [recruiting_candidate::format_phone -phone_number $home_phone]<br>Mobile: [recruiting_candidate::format_phone -phone_number $cell_phone]" \
             "(<a href=\"rate-candidate?[export_vars {interview_id candidate_id}]\">rate this candidate</a>)"]
 } if_no_rows {
-    table::addSortableRow interviews [list "You don't have any candidates to interview right now."]
+    ui::table::add_sortable_row interviews [list "You don't have any candidates to interview right now."]
 }
 
 set context_bar [list [list "index" "Recruiting"] "My New Interviews"]
 
 ad_return_template
+
+
+
+

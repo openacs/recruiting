@@ -19,9 +19,9 @@ if {$delete_p == "notyet"} {
     
     array set candidate_info [recruiting_candidate::get -candidate_id $candidate_id]
     
-    table::setTitle delete "Deleting $candidate_info(first_name) $candidate_info(last_name)"
-    table::setForm delete [ns_conn url]
-    table::addUnsortedRow delete [list "<center><br>This will completely remove this candidate and all their information from the system.<br>If instead all you want to do is make this candidate invisible, <a href=\"archive-candidate?[export_vars {candidate_id referrer}]\">archive them</a> instead.<br>Are you sure you want to delete $candidate_info(first_name) $candidate_info(last_name)?.<p><input type=submit name=delete_p value=Yes> <input type=submit name=delete_p value=No><br>[export_form_vars referrer candidate_id]</center>"]
+    ui::table::set_title delete "Deleting $candidate_info(first_name) $candidate_info(last_name)"
+    ui::table::set_form delete [ns_conn url]
+    ui::table::add_unsorted_row delete [list "<center><br>This will completely remove this candidate and all their information from the system.<br>If instead all you want to do is make this candidate invisible, <a href=\"archive-candidate?[export_vars {candidate_id referrer}]\">archive them</a> instead.<br>Are you sure you want to delete $candidate_info(first_name) $candidate_info(last_name)?.<p><input type=submit name=delete_p value=Yes> <input type=submit name=delete_p value=No><br>[export_form_vars referrer candidate_id]</center>"]
     
     set context_bar [list [list "../" "Recruiting"] [list "index" "Admin"] [list "list-candidates" "Candidates"] "Delete Candidate"]
 
@@ -37,3 +37,7 @@ if {$delete_p == "notyet"} {
     }
 
 }
+
+
+
+

@@ -23,23 +23,23 @@ array set candidate_info [recruiting_candidate::get -candidate_id $interview_inf
 set interviewer_id $interview_info(interviewer_id)
 set candidate_id $interview_info(candidate_id)
 
-table::setTitle ratings "Your ratings for $candidate_info(first_name) $candidate_info(last_name)"
-table::setColumnHeadings ratings [list "Criteria" "Rating"]
-table::setColumnAlignment ratings [list left center]
-table::setExportVars ratings [export_vars interview_id]
+ui::table::set_title ratings "Your ratings for $candidate_info(first_name) $candidate_info(last_name)"
+ui::table::set_column_headings ratings [list "Criteria" "Rating"]
+ui::table::set_column_alignment ratings [list left center]
+ui::table::set_export_vars ratings [export_vars interview_id]
 
 db_foreach get_ratings {} {
-    table::addSortableRow ratings [list "<b>$criteria_name</b><br>$description" "<b>$rating</b>"]
+    ui::table::add_sortable_row ratings [list "<b>$criteria_name</b><br>$description" "<b>$rating</b>"]
 } if_no_rows {
-    table::addSortableRow ratings [list "You has not made any ratings for $candidate_info(first_name) $candidate_info(last_name)"]
+    ui::table::add_sortable_row ratings [list "You has not made any ratings for $candidate_info(first_name) $candidate_info(last_name)"]
 }
 
-table::setTitle summary "Summary Info"
-table::addUnsortedRow summary [list "Average rating:" [db_string get_average_rating {}]]
-table::addUnsortedRow summary [list "Hiring suggestion:" [db_string get_should_hire_p {}]]
+ui::table::set_title summary "Summary Info"
+ui::table::add_unsorted_row summary [list "Average rating:" [db_string get_average_rating {}]]
+ui::table::add_unsorted_row summary [list "Hiring suggestion:" [db_string get_should_hire_p {}]]
 
-table::setTitle comments "Comments"
-table::addUnsortedRow comments [list $interview_info(comment)]
+ui::table::set_title comments "Comments"
+ui::table::add_unsorted_row comments [list $interview_info(comment)]
 
 set context_bar [list \
         [list "index" "Recruiting"] \
@@ -47,3 +47,10 @@ set context_bar [list \
         "Interview Ratings"]
 
 ad_return_template
+
+
+
+
+
+
+

@@ -6,5 +6,7 @@
     <formtemplate id="assign_interview"></formtemplate>
 </if>
 <else>
-    <%= [table::outputTable search_results] %>
+    <%= [ui::table::output_table search_results] %>
 </else>
+
+

@@ -29,27 +29,27 @@ if {![empty_string_p "$info(zip_plus_four)"]} {
 }
 append address " $info(country)"
 
-table::setTitle candidate "Recruiting Candidate Detail"
-table::addUnsortedRow candidate [list "Name:" "$info(last_name), $info(first_name)"]
-table::addUnsortedRow candidate [list "Address:" "$address"]
-table::addUnsortedRow candidate [list "Home Phone:" "[recruiting_candidate::format_phone -phone_number $info(home_phone)]"]
-table::addUnsortedRow candidate [list "Mobile Phone:" "[recruiting_candidate::format_phone -phone_number $info(cell_phone)]"]
-table::addUnsortedRow candidate [list "Status:" "$info(status) (<a href=change-candidate-status?candidate_id=$info(candidate_id)>change status</a>)"]
+ui::table::set_title candidate "Recruiting Candidate Detail"
+ui::table::add_unsorted_row candidate [list "Name:" "$info(last_name), $info(first_name)"]
+ui::table::add_unsorted_row candidate [list "Address:" "$address"]
+ui::table::add_unsorted_row candidate [list "Home Phone:" "[recruiting_candidate::format_phone -phone_number $info(home_phone)]"]
+ui::table::add_unsorted_row candidate [list "Mobile Phone:" "[recruiting_candidate::format_phone -phone_number $info(cell_phone)]"]
+ui::table::add_unsorted_row candidate [list "Status:" "$info(status) (<a href=change-candidate-status?candidate_id=$info(candidate_id)>change status</a>)"]
 
 set possible_ratings [db_string get_num_criteria {}]
 
-table::setTitle interviews "Interviews for this candidate"
-table::setColumnHeadings interviews [list \
+ui::table::set_title interviews "Interviews for this candidate"
+ui::table::set_column_headings interviews [list \
         "Interviewer" \
         "Completed?" \
         "Average Rating" \
         "Recommends Hiring"
 ]
 
-table::setColumnAlignment interviews [list left center center center]
-table::setExportVars interviews [export_vars candidate_id]
+ui::table::set_column_alignment interviews [list left center center center]
+ui::table::set_export_vars interviews [export_vars candidate_id]
 db_foreach get_interviews {} {
-    table::addUnsortedRow interviews [list \
+    ui::table::add_unsorted_row interviews [list \
             "$last_name, $first_names" \
             "$completed_p" \
             "[db_string get_average_rating {}]" \
@@ -58,23 +58,29 @@ db_foreach get_interviews {} {
     (<a href=view-comments?[export_vars candidate_id]>view comments</a>)
     (<a href=delete-interview?[export_vars {interview_id candidate_id referrer}]>delete</a>)"]
 } if_no_rows {
-    table::addUnsortedRow interviews [list "No Interviews assigned. (<a href=assign-candidate-interview?[export_vars candidate_id]>assign one</a>)"]
+    ui::table::add_unsorted_row interviews [list "No Interviews assigned. (<a href=assign-candidate-interview?[export_vars candidate_id]>assign one</a>)"]
 }
-table::addUnsortedRow interviews [list "" "" "" "" "(<a href=view-average-ratings?[export_vars candidate_id]>view average ratings</a>)"]
+ui::table::add_unsorted_row interviews [list "" "" "" "" "(<a href=view-average-ratings?[export_vars candidate_id]>view average ratings</a>)"]
 
-table::setTitle options "Options"
-table::addUnsortedRow options [list "<a href=edit-candidate?[export_vars candidate_id]>Edit Information</a>"]
-table::addUnsortedRow options [list "<a href=change-candidate-status?[export_vars candidate_id]>Change Status</a>"]
-table::addUnsortedRow options [list "<a href=assign-candidate-interview?[export_vars candidate_id]>Assign Interview</a>"]
-table::addUnsortedRow options [list "<a href=archive-candidate?[export_vars {candidate_id referrer}]>Archive this candidate</a>"]
-table::addUnsortedRow options [list "<a href=delete-candidate?[export_vars {candidate_id referrer}]>Delete this candidate</a>"]
+ui::table::set_title options "Options"
+ui::table::add_unsorted_row options [list "<a href=edit-candidate?[export_vars candidate_id]>Edit Information</a>"]
+ui::table::add_unsorted_row options [list "<a href=change-candidate-status?[export_vars candidate_id]>Change Status</a>"]
+ui::table::add_unsorted_row options [list "<a href=assign-candidate-interview?[export_vars candidate_id]>Assign Interview</a>"]
+ui::table::add_unsorted_row options [list "<a href=archive-candidate?[export_vars {candidate_id referrer}]>Archive this candidate</a>"]
+ui::table::add_unsorted_row options [list "<a href=delete-candidate?[export_vars {candidate_id referrer}]>Delete this candidate</a>"]
 
 set attach_url [attachments::add_attachment_url -object_id $candidate_id -return_url "[ns_conn url]?[export_vars candidate_id]"]
 
-table::setTitle resume "Resume"
-table::addUnsortedRow resume [list "No resume uploaded.  (<a href=\"$attach_url\">upload a resume</a>)"]
+ui::table::set_title resume "Resume"
+ui::table::add_unsorted_row resume [list "No resume uploaded.  (<a href=\"$attach_url\">upload a resume</a>)"]
 
 
 set context_bar [list [list "../" "Recruiting"] [list "index" "Admin"] [list "list-candidates" "Candidates"] "One Candidate"]
 
 ad_return_template
+
+
+
+
+
+

@@ -3,9 +3,11 @@
 
 <table width=100%>
 <tr><td>
-<%= [table::outputTable candidates] %>
+<%= [ui::table::output_table candidates] %>
 </td><td valign=top>
-<%= [table::outputTable options] %>
+<%= [ui::table::output_table options] %>
 </td><tr>
 </table>
+
+
 

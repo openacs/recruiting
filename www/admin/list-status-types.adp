@@ -2,10 +2,12 @@
 <property name="context_bar">@context_bar@</property>
 
 <table width=100%><tr><td valign=top>
-<%= [table::outputTable enabled] %>
+<%= [ui::table::output_table enabled] %>
 <p>
-<%= [table::outputTable disabled] %>
+<%= [ui::table::output_table disabled] %>
 </td><td valign=top>
-<%= [table::outputTable options] %>
+<%= [ui::table::output_table options] %>
 </td></tr>
 </table>
+
+

@@ -3,8 +3,10 @@
 
 <table width=100%>
 <tr><td valign=top>
-<%= [table::outputTable ratings] %>
+<%= [ui::table::output_table ratings] %>
 </td><td valign=top>
-<%= [table::outputTable summary] %>
+<%= [ui::table::output_table summary] %>
 </td></tr>
 </table>
+
+

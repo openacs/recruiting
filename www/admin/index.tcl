@@ -26,17 +26,20 @@ if {!$criteria_defined_p} {
     set criteria_msg ""
 }
 
-table::setTitle setup "Setup"
-table::addUnsortedRow setup [list "<a href=list-status-types.tcl>Candidate status types</a>$status_types_msg"]
-table::addUnsortedRow setup [list "<a href=list-criteria>Interview criteria</a>$criteria_msg"]
+ui::table::set_title setup "Setup"
+ui::table::add_unsorted_row setup [list "<a href=list-status-types.tcl>Candidate status types</a>$status_types_msg"]
+ui::table::add_unsorted_row setup [list "<a href=list-criteria>Interview criteria</a>$criteria_msg"]
 
 db_1row get_num_candidates {}
 db_1row get_pending_interviews {}
 db_1row get_num_archived_candidates {}
 
-table::setTitle summary "Summary Information"
-table::addUnsortedRow summary [list "Candidates: $num_candidates" "(<a href=list-candidates>candidate administration</a>)"]
-table::addUnsortedRow summary [list "Pending Interviews: $pending_interviews" "(<a href=\"list-interviews\">view interviews</a>)"]
-table::addUnsortedRow summary [list "$num_archived_candidates candidates have been archived" "(<a href=\"list-archived-candidates\">view archived candidates</a>)"] 
+ui::table::set_title summary "Summary Information"
+ui::table::add_unsorted_row summary [list "Candidates: $num_candidates" "(<a href=list-candidates>candidate administration</a>)"]
+ui::table::add_unsorted_row summary [list "Pending Interviews: $pending_interviews" "(<a href=\"list-interviews\">view interviews</a>)"]
+ui::table::add_unsorted_row summary [list "$num_archived_candidates candidates have been archived" "(<a href=\"list-archived-candidates\">view archived candidates</a>)"] 
 
 set context_bar [list [list "../" "Recruiting"] "Admin"]
+
+
+

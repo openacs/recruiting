@@ -31,15 +31,18 @@ if {[form is_valid assign_interview]} {
     form get_values assign_interview \
             search_text
 
-    table::setTitle search_results "Choose an interviewer"
+    ui::table::set_title search_results "Choose an interviewer"
 
     db_foreach select_users {} {
-        table::addSortableRow search_results [list "<a href=assign-candidate-interview-2?[export_vars "candidate_id search_user_id"]>$last_name, $first_names ($email)</a>"]
+        ui::table::add_sortable_row search_results [list "<a href=assign-candidate-interview-2?[export_vars "candidate_id search_user_id"]>$last_name, $first_names ($email)</a>"]
     } if_no_rows {
-        table::addSortableRow search_results [list "There were no users matching your criteria"]
+        ui::table::add_sortable_row search_results [list "There were no users matching your criteria"]
     }
 }
 
 set context_bar [list [list "../" "Recruiting"] [list "index" "Admin"] [list "list-candidates" "Candidates"] [list "view-one-candidate?[export_vars candidate_id]" "One Candidate"] "Assign Interview"]
     
 ad_return_template
+
+
+

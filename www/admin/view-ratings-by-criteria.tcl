@@ -14,17 +14,17 @@ ad_page_contract {
 array set candidate_info [recruiting_candidate::get -candidate_id $candidate_id]
 array set criteria_info [recruiting_criteria::get -criteria_id $criteria_id]
 
-table::setTitle ratings "$criteria_info(criteria_name) ratings for $candidate_info(first_name) $candidate_info(last_name)"
-table::setColumnHeadings ratings [list "Interviewer" "$criteria_info(criteria_name) Rating"]
-table::setColumnAlignment ratings [list left center]
+ui::table::set_title ratings "$criteria_info(criteria_name) ratings for $candidate_info(first_name) $candidate_info(last_name)"
+ui::table::set_column_headings ratings [list "Interviewer" "$criteria_info(criteria_name) Rating"]
+ui::table::set_column_alignment ratings [list left center]
 db_foreach get_ratings_by_criteria {} {
-    table::addSortableRow ratings [list "$interviewer_name (<a href=view-ratings?[export_vars interview_id]>view all ratings</a>)" "$rating"]
+    ui::table::add_sortable_row ratings [list "$interviewer_name (<a href=view-ratings?[export_vars interview_id]>view all ratings</a>)" "$rating"]
 } if_no_rows {
-    table::addSortableRow ratings [list "$candidate_info(first_name) $candidate_info(last_name) has no $criteria_info(criteria_name) ratings."]
+    ui::table::add_sortable_row ratings [list "$candidate_info(first_name) $candidate_info(last_name) has no $criteria_info(criteria_name) ratings."]
 }
 
-table::setTitle summary "Summary Information"
-table::addUnsortedRow summary [list "Average rating:" [db_string get_average_rating_by_criteria {}]]
+ui::table::set_title summary "Summary Information"
+ui::table::add_unsorted_row summary [list "Average rating:" [db_string get_average_rating_by_criteria {}]]
 
 set context_bar [list \
         [list "../" "Recruiting"] \
@@ -34,3 +34,9 @@ set context_bar [list \
         "Criteria Ratings"]
 
 ad_return_template
+
+
+
+
+
+

@@ -2,7 +2,9 @@
 <property name="context_bar">@context_bar@</property>
 
 <table width=100%><tr><td width=50% valign=top>
-<%= [table::outputTable summary] %>
+<%= [ui::table::output_table summary] %>
 </td><td width=50% valign=top>
-<%= [table::outputTable setup] %>
+<%= [ui::table::output_table setup] %>
 </td></tr></table>
+
+

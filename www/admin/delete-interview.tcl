@@ -21,9 +21,9 @@ if {$delete_p == "notyet"} {
     array set candidate_info [recruiting_candidate::get -candidate_id $candidate_id]
     array set interview_info [recruiting_interview::get -interview_id $interview_id]
     
-    table::setTitle delete "Deleting interview for $candidate_info(first_name) $candidate_info(last_name)"
-    table::setForm delete [ns_conn url]
-    table::addUnsortedRow delete [list "<center><br>Are you sure you want to delete $candidate_info(first_name) $candidate_info(last_name)'s interview?<br><br><input type=submit name=delete_p value=Yes> <input type=submit name=delete_p value=No><br>[export_form_vars referrer candidate_id interview_id]<br></center>"]
+    ui::table::set_title delete "Deleting interview for $candidate_info(first_name) $candidate_info(last_name)"
+    ui::table::set_form delete [ns_conn url]
+    ui::table::add_unsorted_row delete [list "<center><br>Are you sure you want to delete $candidate_info(first_name) $candidate_info(last_name)'s interview?<br><br><input type=submit name=delete_p value=Yes> <input type=submit name=delete_p value=No><br>[export_form_vars referrer candidate_id interview_id]<br></center>"]
     
     set context_bar [list [list "../" "Recruiting"] [list "index" "Admin"] [list "list-candidates" "Candidates"] [list "view-one-candidate?[export_vars candidate_id]" "One Candidate"] "Delete Interview"]
 
@@ -37,3 +37,7 @@ if {$delete_p == "notyet"} {
     ns_returnredirect [ns_urldecode $referrer]
 
 }
+
+
+
+

@@ -11,24 +11,27 @@ ad_page_contract {
 set package_id [ad_conn package_id]
 set user_id [ad_verify_and_get_user_id]
 
-table::setTitle enabled "Candidate Criteria"
+ui::table::set_title enabled "Candidate Criteria"
 db_foreach get_enabled_criteria_types {} {
-    table::addUnsortedRow enabled [list "$criteria_name" "(<a href=\"edit-criteria?[export_vars criteria_id]\">edit</a>) (<a href=\"disable-criteria?[export_vars criteria_id]\">disable</a>)"]
+    ui::table::add_unsorted_row enabled [list "$criteria_name" "(<a href=\"edit-criteria?[export_vars criteria_id]\">edit</a>) (<a href=\"disable-criteria?[export_vars criteria_id]\">disable</a>)"]
 }  if_no_rows {
-    table::addUnsortedRow enabled [list "There is no criteria defined yet.  (<a href=new-criteria>Add Criteria</a>)"]
+    ui::table::add_unsorted_row enabled [list "There is no criteria defined yet.  (<a href=new-criteria>Add Criteria</a>)"]
 }
 
 
-table::setTitle disabled "Disabled Criteria"
+ui::table::set_title disabled "Disabled Criteria"
 db_foreach get_disabled_criteria_types {} {
-    table::addUnsortedRow disabled [list "$criteria_name" "(<a href=\"enable-criteria?[export_vars criteria_id]\">enable</a>)"]
+    ui::table::add_unsorted_row disabled [list "$criteria_name" "(<a href=\"enable-criteria?[export_vars criteria_id]\">enable</a>)"]
 } if_no_rows {
-    table::addUnsortedRow disabled [list "There are no disabled criteria"]
+    ui::table::add_unsorted_row disabled [list "There are no disabled criteria"]
 }
 
-table::setTitle options "Options"
-table::addUnsortedRow options [list "<a href=\"new-criteria\">Add New Criteria</a>"]
+ui::table::set_title options "Options"
+ui::table::add_unsorted_row options [list "<a href=\"new-criteria\">Add New Criteria</a>"]
 
 set context_bar [list [list "../" "Recruiting"] [list "index" "Admin"] "Criteria Types"]
 
 ad_return_template
+
+
+

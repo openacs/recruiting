@@ -19,9 +19,9 @@ if {$archive_p == "notyet"} {
     
     array set candidate_info [recruiting_candidate::get -candidate_id $candidate_id]
     
-    table::setTitle archive "Archiving $candidate_info(first_name) $candidate_info(last_name)"
-    table::setForm archive [ns_conn url]
-    table::addUnsortedRow archive [list "<center><br>Archiving a candidate will hide all their information from users of the system other than administrators such as yourself.<br>You will be able to unarchive the user at a later date if you so desire.<p>Are you sure you want to archive $candidate_info(first_name) $candidate_info(last_name)?.<p><input type=submit name=archive_p value=Yes> <input type=submit name=archive_p value=No><br>[export_form_vars referrer candidate_id]</center>"]
+    ui::table::set_title archive "Archiving $candidate_info(first_name) $candidate_info(last_name)"
+    ui::table::set_form archive [ns_conn url]
+    ui::table::add_unsorted_row archive [list "<center><br>Archiving a candidate will hide all their information from users of the system other than administrators such as yourself.<br>You will be able to unarchive the user at a later date if you so desire.<p>Are you sure you want to archive $candidate_info(first_name) $candidate_info(last_name)?.<p><input type=submit name=archive_p value=Yes> <input type=submit name=archive_p value=No><br>[export_form_vars referrer candidate_id]</center>"]
     
     set context_bar [list [list "../" "Recruiting"] [list "index" "Admin"] [list "list-candidates" "Candidates"] "Archive Candidate"]
 
@@ -37,3 +37,7 @@ if {$archive_p == "notyet"} {
     }
 
 }
+
+
+
+

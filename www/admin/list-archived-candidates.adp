@@ -1,5 +1,7 @@
 <master src="recruiting-admin-master">
 <property name="context_bar">@context_bar@</property>
 
-<%= [table::outputTable archived] %>
+<%= [ui::table::output_table archived] %>
+
+
 

@@ -13,23 +13,29 @@ set user_id [ad_verify_and_get_user_id]
 
 set referrer [ns_urlencode [ns_conn url]]
 
-table::setTitle candidates "Recruiting Candidates"
-table::setColumnHeadings candidates [list "Name" "Location" "Status" "Interviews"]
-table::setColumnAlignment candidates [list left left left center left]
+ui::table::set_title candidates "Recruiting Candidates"
+ui::table::set_column_headings candidates [list "Name" "Location" "Status" "Interviews"]
+ui::table::set_column_alignment candidates [list left left left center left]
 db_foreach get_candidates {} {
-    table::addSortableRow candidates [list "$first_name $last_name<br>(<a href=\"mailto:$email\">$email</a>)" \
+    ui::table::add_sortable_row candidates [list "$first_name $last_name<br>(<a href=\"mailto:$email\">$email</a>)" \
             "$city, $state" \
             "$status" \
             "$num_completed_interviews out of $num_interviews<br>completed" \
             "(<a href=\"view-one-candidate?[export_vars candidate_id]\">details</a>) (<a href=delete-candidate?[export_vars {candidate_id referrer}]>Delete this candidate</a>)"]
 } if_no_rows {
-    table::addSortableRow candidates [list "No Candidates"]
+    ui::table::add_sortable_row candidates [list "No Candidates"]
 }
 
-table::setTitle options "Options"
-table::addUnsortedRow options [list "<a href=new-candidate>Add a new candidate</a>"]
-table::addUnsortedRow options [list "<a href=list-archived-candidates>View archived candidates</a>"]
+ui::table::set_title options "Options"
+ui::table::add_unsorted_row options [list "<a href=new-candidate>Add a new candidate</a>"]
+ui::table::add_unsorted_row options [list "<a href=list-archived-candidates>View archived candidates</a>"]
 
 set context_bar [list [list "../" "Recruiting"] [list "index" "Admin"] "Candidates"]
 
 ad_return_template
+
+
+
+
+
+
