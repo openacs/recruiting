@@ -10,7 +10,7 @@ ad_page_contract {
     interview_id:notnull
 }
 
-array set interview_info [recruiting_interview::get -interview_id $interview_id]
+array set interview_info [recruiting::interview::get -interview_id $interview_id]
 array set candidate_info [recruiting_candidate::get -candidate_id $interview_info(candidate_id)]
 
 set interviewer_id $interview_info(interviewer_id)
@@ -45,6 +45,7 @@ set context_bar [list \
         "Interview Ratings"]
 
 ad_return_template
+
 
 
 

@@ -19,7 +19,7 @@ set user_id [ad_verify_and_get_user_id]
 if {$delete_p == "notyet"} {
     
     array set candidate_info [recruiting_candidate::get -candidate_id $candidate_id]
-    array set interview_info [recruiting_interview::get -interview_id $interview_id]
+    array set interview_info [recruiting::interview::get -interview_id $interview_id]
     
     ui::table::set_title delete "Deleting interview for $candidate_info(first_name) $candidate_info(last_name)"
     ui::table::set_form delete [ns_conn url]
@@ -32,11 +32,12 @@ if {$delete_p == "notyet"} {
 } else {
     
     if {$delete_p == "Yes"} {
-        recruiting_interview::delete -interview_id $interview_id
+        recruiting::interview::delete -interview_id $interview_id
     }
     ns_returnredirect [ns_urldecode $referrer]
 
 }
+
 
 
 

@@ -27,7 +27,7 @@ if {[form is_valid new_criteria]} {
     form get_values new_criteria \
             criteria_name description
     
-    recruiting_criteria::new \
+    recruiting::criteria::new \
             -criteria_name $criteria_name \
             -description $description \
             -package_id $package_id \
@@ -40,3 +40,4 @@ if {[form is_valid new_criteria]} {
 set context_bar [list [list "../" "Recruiting"] [list "index" "Admin"] [list "list-criteria" "Criteria Types"] "New Criteria"]
 
 ad_return_template
+

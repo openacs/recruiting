@@ -251,4 +251,25 @@ select acs_object_type__create_type (
        'recruiting_rating__name'
 );
 
+create table recruiting_assignment_emails (
+       package_id                  integer
+                                   constraint recruiting_emails_pkg_id_fk
+                                   references apm_packages(package_id)
+                                   constraint recruiting_emails_pkg_id_uniq
+                                   unique,
+       email_body                  varchar(8000)
+);
+
+insert into recruiting_assignment_emails
+           (package_id,
+            email_body)
+    values (null,'\
+\
+Dear $interviewer_name,\
+\
+Please interview $candidate_name at your earliest convenience.  When you have completed the interview, please go to $url and rate the candidate.\
+\
+Thank you,\
+$sender_name');
+
 \i recruiting-api-create.sql

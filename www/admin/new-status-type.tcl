@@ -27,7 +27,7 @@ if {[form is_valid new_status_type]} {
     form get_values new_status_type \
             short_desc long_desc
     
-    recruiting_status_type::new \
+    recruiting::status_type::new \
             -short_desc $short_desc \
             -long_desc $long_desc \
             -package_id $package_id \
@@ -40,3 +40,4 @@ if {[form is_valid new_status_type]} {
 set context_bar [list [list "../" "Recruiting"] [list "index" "Admin"] [list "list-status-types" "Status Types"] "New Status Type"]
 
 ad_return_template
+

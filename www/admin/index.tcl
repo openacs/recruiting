@@ -29,6 +29,7 @@ if {!$criteria_defined_p} {
 ui::table::set_title setup "Setup"
 ui::table::add_unsorted_row setup [list "<a href=list-status-types.tcl>Candidate status types</a>$status_types_msg"]
 ui::table::add_unsorted_row setup [list "<a href=list-criteria>Interview criteria</a>$criteria_msg"]
+ui::table::add_unsorted_row setup [list "<a href=email-options>Email options</a>"]
 
 db_1row get_num_candidates {}
 db_1row get_pending_interviews {}
@@ -41,5 +42,5 @@ ui::table::add_unsorted_row summary [list "$num_archived_candidates candidates h
 
 set context_bar [list [list "../" "Recruiting"] "Admin"]
 
-
+ad_return_template
 

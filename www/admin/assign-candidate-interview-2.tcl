@@ -20,6 +20,11 @@ set user_id [ad_verify_and_get_user_id]
 
 array set candidate_info [recruiting_candidate::get -candidate_id $candidate_id]
 
+set candidate_name [person::name -person_id $candidate_id]
+set url "[ad_parameter -package_id [ad_acs_kernel_id] SystemURL ""]$package_url"
+set interviewer_name [person::name -person_id $search_user_id]
+set sender_name [person::name -person_id $user_id]
+
 form create msg
 element create msg subject \
         -label "Subject:" \
@@ -33,14 +38,7 @@ element create msg body \
         -datatype text \
         -widget textarea \
         -html {rows 10 cols 60 wrap soft} \
-        -value "
-
-Dear [person::name -person_id $search_user_id],
-
-Please interview [person::name -person_id $candidate_id] at your earliest convenience.  When you have completed the interview, please go to [ad_parameter -package_id [ad_acs_kernel_id] SystemURL ""]$package_url and rate the candidate.
-
-Thank you,
-[person::name -person_id $user_id]"
+        -value [recruiting_email::get_body -package_id $package_id]
 
 element create msg candidate_id \
         -widget hidden \
@@ -59,7 +57,7 @@ if {[form is_valid msg]} {
 
     catch {ns_sendmail $interviewer_email $sender_email "$subject" "$body"} message_send_errors
     
-    recruiting_interview::new \
+    recruiting::interview::new \
         -interviewer_id $search_user_id \
         -candidate_id $candidate_id \
         -package_id $package_id
@@ -71,5 +69,6 @@ if {[form is_valid msg]} {
 set context_bar [list [list "../" "Recruiting"] [list "index" "Admin"] [list "list-candidates" "Candidates"] [list "view-one-candidate?[export_vars candidate_id]" "One Candidate"] "Assign Interview"]
 
 ad_return_template
+
 
 

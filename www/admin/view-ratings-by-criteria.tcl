@@ -12,7 +12,7 @@ ad_page_contract {
 }
 
 array set candidate_info [recruiting_candidate::get -candidate_id $candidate_id]
-array set criteria_info [recruiting_criteria::get -criteria_id $criteria_id]
+array set criteria_info [recruiting::criteria::get -criteria_id $criteria_id]
 
 ui::table::set_title ratings "$criteria_info(criteria_name) ratings for $candidate_info(first_name) $candidate_info(last_name)"
 ui::table::set_column_headings ratings [list "Interviewer" "$criteria_info(criteria_name) Rating"]
@@ -34,6 +34,7 @@ set context_bar [list \
         "Criteria Ratings"]
 
 ad_return_template
+
 
 
 

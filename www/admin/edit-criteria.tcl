@@ -12,7 +12,7 @@ ad_page_contract {
 set package_id [ad_conn package_id]
 set user_id [ad_verify_and_get_user_id]
 
-array set info [recruiting_criteria::get -criteria_id $criteria_id]
+array set info [recruiting::criteria::get -criteria_id $criteria_id]
 
 form create edit_criteria
 element create edit_criteria criteria_name \
@@ -37,7 +37,7 @@ if {[form is_valid edit_criteria]} {
     form get_values edit_criteria \
             criteria_name description
     
-    recruiting_criteria::update_criteria_type \
+    recruiting::criteria::update_criteria_type \
             -criteria_id $criteria_id \
             -criteria_name $criteria_name \
             -description $description \
@@ -51,3 +51,4 @@ if {[form is_valid edit_criteria]} {
 set context_bar [list [list "../" "Recruiting"] [list "index" "Admin"] [list "list-criteria" "Criteria Types"] "Edit Criteria"]
 
 ad_return_template
+

@@ -60,7 +60,7 @@ if {[form is_valid rate_sheet]} {
                 criteria_$criteria_id
 
         if {[set criteria_$criteria_id] != 0} {
-            recruiting_rating::new \
+            recruiting::rating::new \
                 -package_id $package_id \
                 -interview_id $interview_id \
                 -criteria_id $criteria_id \
@@ -75,3 +75,4 @@ if {[form is_valid rate_sheet]} {
 }
 
 set context_bar [list [list "index" "Recruiting"] [list "my-new-interviews" "My New Interviews"] "One Rate Sheet"]
+

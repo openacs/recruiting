@@ -11,7 +11,7 @@ ad_page_contract {
 set package_id [ad_conn package_id]
 set user_id [ad_verify_and_get_user_id]
 
-array set interview_info [recruiting_interview::get -interview_id $interview_id]
+array set interview_info [recruiting::interview::get -interview_id $interview_id]
 
 if {$user_id != $interview_info(interviewer_id)} {
     
@@ -47,6 +47,7 @@ set context_bar [list \
         "Interview Ratings"]
 
 ad_return_template
+
 
 
 

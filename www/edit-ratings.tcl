@@ -13,7 +13,7 @@ ad_page_contract {
 set package_id [ad_conn package_id]
 set user_id [ad_verify_and_get_user_id]
 
-array set interview_info [recruiting_interview::get -interview_id $interview_id]
+array set interview_info [recruiting::interview::get -interview_id $interview_id]
 array set candidate_info [recruiting_candidate::get -candidate_id $candidate_id]
 
 form create rate_sheet
@@ -68,7 +68,7 @@ if {[form is_valid rate_sheet]} {
         form get_values rate_sheet \
                 criteria_$criteria_id
 
-        recruiting_rating::new \
+        recruiting::rating::new \
                 -package_id $package_id \
                 -interview_id $interview_id \
                 -criteria_id $criteria_id \
@@ -82,3 +82,5 @@ if {[form is_valid rate_sheet]} {
 }
 
 set context_bar [list [list "index" "Recruiting"] [list "my-completed-interviews" "My Completed Interviews"] "Edit Rate Sheet"]
+
+

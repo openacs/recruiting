@@ -13,7 +13,7 @@ ad_page_contract {
 set package_id [ad_conn package_id]
 set user_id [ad_verify_and_get_user_id]
 
-array set info [recruiting_status_type::get -status_type_id $status_type_id]
+array set info [recruiting::status_type::get -status_type_id $status_type_id]
 
 form create edit_status_type
 element create edit_status_type short_desc \
@@ -38,7 +38,7 @@ if {[form is_valid edit_status_type]} {
     form get_values edit_status_type \
             short_desc long_desc
     
-    recruiting_status_type::update_status_type \
+    recruiting::status_type::update_status_type \
             -status_type_id $status_type_id \
             -short_desc $short_desc \
             -long_desc $long_desc \
@@ -52,3 +52,4 @@ if {[form is_valid edit_status_type]} {
 set context_bar [list [list "../" "Recruiting"] [list "index" "Admin"] [list "list-status-types" "Status Types"] "Edit Status Type"]
 
 ad_return_template
+
