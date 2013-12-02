@@ -55,7 +55,7 @@ if {[form is_valid msg]} {
     set sender_email [db_string get_sender_email {}]
     set interviewer_email [db_string get_interviewer_email {}]
 
-    catch {ns_sendmail $interviewer_email $sender_email "$subject" "$body"} message_send_errors
+    catch {acs_mail_lite::send -to_addr $interviewer_email -from_addr $sender_email -subject $subject -body $body} message_send_errors
     
     recruiting::interview::new \
         -interviewer_id $search_user_id \
